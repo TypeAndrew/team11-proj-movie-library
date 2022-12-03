@@ -1,6 +1,4 @@
-<<<<<<< Updated upstream
 import { getMovies } from "./js/fetchData.js";
-=======
 const modal = document.getElementById("teamModal");
 
 // Получить кнопку, которая открывает модальный
@@ -25,4 +23,3 @@ window.onclick = function(event) {
     modal.style.display = "none";
   }
 }
->>>>>>> Stashed changes
