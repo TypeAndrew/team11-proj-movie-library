@@ -7,13 +7,14 @@ import axios from 'axios';
 import Notiflix from 'notiflix';
 
 const formEl = document.querySelector('.header__form');
-formEl.style.background = 'blue';
-formEl.style.display = 'flex';
-formEl.style.justifyContent = 'center';
+const movieSection = document.querySelector('.main-section');
+// formEl.style.background = 'blue';
+// formEl.style.display = 'flex';
+// formEl.style.justifyContent = 'center';
 //const galleryEl = document.querySelector('.gallery');
 const galleryEl = document.createElement('div');
 galleryEl.classList.add('gallery');
-document.body.append(galleryEl);
+movieSection.append(galleryEl);
 let galleryLinkEl = document.createElement('a');
 galleryEl.append(galleryLinkEl);
 
