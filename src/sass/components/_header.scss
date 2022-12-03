@@ -1,9 +1,14 @@
 a {
   all: unset;
-  
 }
 
 .header {
+  padding: 40px 20px 0;
+
+  @media screen and (min-width: 768px) {
+    padding: 40px 32px 0;
+  }
+
   @media screen and (-webkit-min-device-pixel-ratio: 1),
     (min-resolution: 96dpi) {
     background-repeat: no-repeat;
@@ -40,23 +45,27 @@ a {
     }
   }
 }
+
 .header__navigation {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding-top: 50px;
+  // padding-top: 50px;
 }
-.header__logo {
-  @media screen and(max-width:767px) {
-    padding-left: 22px;
-  }
-  @media screen and (min-width: 768px) {
-    padding-left: 32px;
-  }
+
+// .header__logo {
+//   @media screen and(max-width:767px) {
+//     margin-left: 22px;
+//   }
+//   @media screen and (min-width: 768px) {
+//     margin-left: 32px;
+//   }
+// }
+
+.header__icon {
+  display: inline;
 }
-.header__icon{
-  display:inline;
-}
+
 .header__title {
   @media screen and(max-width:767px) {
     display: none;
@@ -70,17 +79,22 @@ a {
   line-height: 1.16;
   color: #ffffff;
 }
+
 .header__links {
-  @media screen and(max-width:767px) {
-    padding-right: 20px;
-  }
-  @media screen and (min-width: 768px) {
-    padding-right: 33px;
-  }
+  display: flex;
+  // @media screen and(max-width:767px) {
+  //   padding-right: 20px;
+  // }
+  // @media screen and (min-width: 768px) {
+  //   padding-right: 33px;
+  // }
 }
 
 .header__home-page {
-  padding-right: 40px;
+  // padding-right: 40px;
+  padding: 10px;
+  margin-right: 20px;
+
   font-family: 'Roboto';
   font-weight: 500;
   font-size: 12px;
@@ -90,7 +104,10 @@ a {
 
   cursor: pointer;
 }
-.header__my-libery {
+
+.header__my-library {
+  padding: 10px;
+
   font-family: 'Roboto';
   font-weight: 500;
   font-size: 12px;
@@ -100,44 +117,45 @@ a {
 
   cursor: pointer;
 }
+
 .header__form-input {
+  font-weight: 400;
+
   all: unset;
   background-color: inherit;
   color: #ffffff;
   cursor: text;
   @media screen and (max-width: 767px) {
-   max-width: 336px;
-  
+    max-width: 336px;
   }
-  @media screen and (min-width: 768px)  {
+  @media screen and (min-width: 768px) {
     width: 394px;
   }
 }
+
 .header__form-input::placeholder {
   color: #ffffff;
 }
+
 .header__form-button {
   all: unset;
   background-color: inherit;
   cursor: pointer;
 }
 
-.header__form{
+.header__form {
   display: flex;
   justify-content: space-between;
   padding-bottom: 4px;
-  border-bottom: 0.5px solid #FFFFFF ;
+  border-bottom: 0.5px solid #ffffff;
   margin-left: auto;
   margin-right: auto;
-    @media screen and (max-width: 767px) {
-      margin-top: 60px;
-     max-width: 336px;
-    
-    }
-    @media screen and (min-width: 768px)  {
-      margin-top: 40px ;
-      width: 394px;
-    }
-    
+  @media screen and (max-width: 767px) {
+    margin-top: 60px;
+    max-width: 336px;
+  }
+  @media screen and (min-width: 768px) {
+    margin-top: 40px;
+    width: 394px;
+  }
 }
-
