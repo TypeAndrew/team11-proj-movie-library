@@ -1,0 +1,143 @@
+a {
+  all: unset;
+  
+}
+
+.header {
+  @media screen and (-webkit-min-device-pixel-ratio: 1),
+    (min-resolution: 96dpi) {
+    background-repeat: no-repeat;
+    background-size: cover;
+    @media screen and (max-width: 767px) {
+      background-image: url(../images/header/abstract_320px1.jpg);
+      height: 230px;
+    }
+    @media screen and (min-width: 768px) and (max-width: 1279px) {
+      background-image: url(../images/header/abstract_768px1.jpg);
+      height: 216px;
+    }
+    @media screen and (min-width: 1280px) {
+      background-image: url(../images/header/abstract_1280px1.jpg);
+      height: 216px;
+    }
+  }
+
+  @media screen and (-webkit-min-device-pixel-ratio: 2),
+    (min-resolution: 182dpi) {
+    background-repeat: no-repeat;
+    background-size: cover;
+    @media screen and (max-width: 767px) {
+      background-image: url(../images/header/abstract_320px2.jpg);
+      height: 230px;
+    }
+    @media screen and (min-width: 768px) and (max-width: 1279px) {
+      background-image: url(../images/header/abstract_768px2.jpg);
+      height: 216px;
+    }
+    @media screen and (min-width: 1280px) {
+      background-image: url(../images/header/abstract_1280px2.jpg);
+      height: 216px;
+    }
+  }
+}
+.header__navigation {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 50px;
+}
+.header__logo {
+  @media screen and(max-width:767px) {
+    padding-left: 22px;
+  }
+  @media screen and (min-width: 768px) {
+    padding-left: 32px;
+  }
+}
+.header__icon{
+  display:inline;
+}
+.header__title {
+  @media screen and(max-width:767px) {
+    display: none;
+  }
+  @media screen and (min-width: 768px) {
+    display: inline-block;
+  }
+  font-family: 'Roboto';
+  font-weight: 500;
+  font-size: 30px;
+  line-height: 1.16;
+  color: #ffffff;
+}
+.header__links {
+  @media screen and(max-width:767px) {
+    padding-right: 20px;
+  }
+  @media screen and (min-width: 768px) {
+    padding-right: 33px;
+  }
+}
+
+.header__home-page {
+  padding-right: 40px;
+  font-family: 'Roboto';
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 1.16;
+  color: #ffffff;
+  text-transform: uppercase;
+
+  cursor: pointer;
+}
+.header__my-libery {
+  font-family: 'Roboto';
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 1.16;
+  color: #ffffff;
+  text-transform: uppercase;
+
+  cursor: pointer;
+}
+.header__form-input {
+  all: unset;
+  background-color: inherit;
+  color: #ffffff;
+  cursor: text;
+  @media screen and (max-width: 767px) {
+   max-width: 336px;
+  
+  }
+  @media screen and (min-width: 768px)  {
+    width: 394px;
+  }
+}
+.header__form-input::placeholder {
+  color: #ffffff;
+}
+.header__form-button {
+  all: unset;
+  background-color: inherit;
+  cursor: pointer;
+}
+
+.header__form{
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 4px;
+  border-bottom: 0.5px solid #FFFFFF ;
+  margin-left: auto;
+  margin-right: auto;
+    @media screen and (max-width: 767px) {
+      margin-top: 60px;
+     max-width: 336px;
+    
+    }
+    @media screen and (min-width: 768px)  {
+      margin-top: 40px ;
+      width: 394px;
+    }
+    
+}
+
