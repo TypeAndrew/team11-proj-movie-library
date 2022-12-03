@@ -1,5 +1,5 @@
 {
-  "name": "parcel-project-template",
+  "name": "filmoteka-group11",
   "version": "2.0.0",
   "description": "",
   "homepage": "https://True0Devil.github.io/filmoteka-group11",
@@ -15,7 +15,7 @@
   "author": "Alexander Repeta <alexander.repeta@gmail.com>",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/goitacademy/parcel-project-template/issues"
+    "url": "https://github.com/True0Devil/filmoteka-group11/issues"
   },
   "dependencies": {
     "axios": "^1.2.0",
