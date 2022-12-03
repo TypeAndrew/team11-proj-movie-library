@@ -1,14 +1,21 @@
+//export * from 'fetcData.js'
+
 import SimpleLightbox from "simplelightbox";
 // Додатковий імпорт стилів
 import "simplelightbox/dist/simple-lightbox.min.css";
 import axios from "axios";
 import Notiflix from 'notiflix';
 
-const formEl = document.querySelector('.search-form');
+const formEl = document.querySelector('.header__form');
 formEl.style.background = "blue"; 
 formEl.style.display = "flex";
 formEl.style.justifyContent = "center";
-const galleryEl = document.querySelector('.gallery');  
+//const galleryEl = document.querySelector('.gallery');
+const galleryEl = document.createElement("div");
+galleryEl.classList.add("gallery");
+document.body.append(galleryEl); 
+let galleryLinkEl = document.createElement("a"); 
+galleryEl.append(galleryLinkEl);
 
 const apiKey = 'c491b5b8e2b4a9ab13619b0a91f8bb41';
 let markup = "";
@@ -17,7 +24,7 @@ let total_results = 0;
 let lenguage = 'en-US';
 let include_adult = false;
 
-document.body.insertAdjacentHTML("afterend", `<div class="footer"> <button type="button" class="load-more">Load more</button></div>`);
+//document.body.insertAdjacentHTML("afterend", `<div class="footer"> <button type="button" class="load-more">Load more</button></div>`);
 
 const createMarckup = function (response) {
   
@@ -48,16 +55,15 @@ const  getMovies = function(request)  {
   
    fetchData(request).then((response) => {
     console.log(response.data);
-   
-    if (response.data.results.length === 0) {
-      Notiflix.Notify.warning('Sorry, there are no images matching your search query. Please try again.');
-
-    } else {
+    
+       if (response.data === null) {
+           Notiflix.Notify.warning('Sorry, there are no images matching your search query. Please try again.');
+       } else {
       
       galleryEl.innerHTML = createMarckup(response);
       document.querySelector('.load-more').style.opacity = "1";
       total_results += response.data.length;
-     let lightbox = new SimpleLightbox('.photo-card a', { captionsData: 'alt', captionDelay: 250, widthRatio: 0.8 });
+     let lightbox = new SimpleLightbox('.gallery a', { captionsData: 'alt', captionDelay: 250, widthRatio: 0.8 });
       lightbox.show();
       if (total_results === response.data.total_results) {
         Notiflix.Notify.warning("We're sorry, but you've reached the end of search results.");
