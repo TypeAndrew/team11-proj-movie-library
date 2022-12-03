@@ -1,3 +1,4 @@
+export { teamModal };
 
 const modal = document.getElementById("teamModal");
 const btn = document.getElementById("myBtn");
