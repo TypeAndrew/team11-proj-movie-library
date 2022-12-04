@@ -112,6 +112,7 @@ function getGenre() {
   return response;
 }
 
-gallery.addEventListener('click', e => {
-  e.preventDefault();
-});
+// uncomment this to make lightbox work
+// gallery.addEventListener('click', e => {
+//   e.preventDefault();
+// });
