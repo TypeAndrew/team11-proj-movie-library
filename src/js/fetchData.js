@@ -5,6 +5,7 @@ import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
 import axios from 'axios';
 import Notiflix from 'notiflix';
+// import * as basicLightbox from 'basiclightbox';
 
 const formEl = document.querySelector('.header__form');
 const movieSection = document.querySelector('.main-section');
@@ -39,7 +40,6 @@ const createMarckup = function (response) {
                 </div>
             </li>`;
   });
-
   return markup;
 };
 
@@ -97,3 +97,16 @@ function getGenre() {
   const response = axios.get(request);
   return response;
 }
+
+// galleryEl.addEventListener('click', showModalMovie);
+// const modalCard = document.querySelector('.modal__movie')
+// const closeBtn = document.querySelector(".modal__close");
+
+// function showModalMovie(evt) {
+//   evt.preventDefault();
+  
+//   if (evt.target.nodeName !== 'IMG' && evt.target.nodeName !== 'H2') {
+//     return;
+//   }
+
+// }
