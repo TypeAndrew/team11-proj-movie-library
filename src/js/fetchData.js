@@ -111,8 +111,3 @@ function getGenre() {
   const response = axios.get(request);
   return response;
 }
-
-// uncomment this to make lightbox work
-// gallery.addEventListener('click', e => {
-//   e.preventDefault();
-// });
