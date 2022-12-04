@@ -8,6 +8,13 @@ import Notiflix from 'notiflix';
 
 const formEl = document.querySelector('.header__form');
 const movieSection = document.querySelector('.main-section');
+const gallery = document.querySelector('.movie__gallery');
+
+let lightbox = new SimpleLightbox('.movie__gallery a', {
+  captionsData: 'alt',
+  captionDelay: 250,
+  widthRatio: 0.8,
+});
 // formEl.style.background = 'blue';
 // formEl.style.display = 'flex';
 // formEl.style.justifyContent = 'center';
@@ -32,12 +39,19 @@ const createMarckup = function (response) {
     const genreId = element.genre_ids.map(id => id);
 
     markup += `<li class="movie__card">
-                <img class="movie__poster" src="https://www.themoviedb.org/t/p/original/${element.poster_path}" alt="${element.original_title}" loading="lazy">
-                <div>
-                    <h2 class="movie__name">${element.title}</h2>
-                    <p class="movie__info">${genreId}<span class="movie__year">${element.release_date.slice(0, 4)}</span></p>
-                </div>
-            </li>`;
+    <a href="https://www.themoviedb.org/t/p/original/${
+      element.backdrop_path
+    }"><img class="movie__poster" src="https://www.themoviedb.org/t/p/original/${
+      element.poster_path
+    }" alt="${element.original_title}" loading="lazy"></a>
+    <div>
+    <h2 class="movie__name">${element.title}</h2>
+    <p class="movie__info">${genreId}<span class="movie__year">${element.release_date.slice(
+      0,
+      4
+    )}</span></p>
+    </div>
+    </li>`;
   });
 
   return markup;
@@ -59,14 +73,14 @@ const getMovies = function (request) {
         );
       } else {
         galleryEl.innerHTML = createMarckup(response);
-        document.querySelector('.load-more').style.opacity = '1';
+        // document.querySelector('.load-more').style.opacity = '1';
         total_results += response.data.length;
-        let lightbox = new SimpleLightbox('.gallery a', {
-          captionsData: 'alt',
-          captionDelay: 250,
-          widthRatio: 0.8,
-        });
-        lightbox.show();
+        // let lightbox = new SimpleLightbox('.movie__gallery img', {
+        //   captionsData: 'alt',
+        //   captionDelay: 250,
+        //   widthRatio: 0.8,
+        // });
+        lightbox.refresh();
         if (total_results === response.data.total_results) {
           Notiflix.Notify.warning(
             "We're sorry, but you've reached the end of search results."
@@ -93,7 +107,11 @@ let request = `https://api.themoviedb.org/3/trending/movie/day?api_key=${apiKey}
 getMovies(request);
 
 function getGenre() {
-  const request = `https://api.themoviedb.org/3/genre/movie/list?api_key=${apiKey}&language=en-US`
+  const request = `https://api.themoviedb.org/3/genre/movie/list?api_key=${apiKey}&language=en-US`;
   const response = axios.get(request);
   return response;
 }
+
+gallery.addEventListener('click', e => {
+  e.preventDefault();
+});
