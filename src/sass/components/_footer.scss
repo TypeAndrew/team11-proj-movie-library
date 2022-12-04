@@ -1,0 +1,38 @@
+.footer {
+  display: flex;
+  height: 80px;
+  justify-content: center;
+  align-items: center;
+  background-color: #f7f7f7;
+  color: $footerTextColor;
+  font-weight: 400;
+
+  @media screen and (max-width: 767px) {
+    display: block;
+    height: 100px;
+  }
+}
+.footer__text {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  @media screen and (max-width: 767px) {
+    padding-bottom: 10px;
+    padding-top: 30px;
+  }
+}
+.footer__developer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.footer__like {
+  width: 14px;
+  height: 12px;
+  margin: 0 10px;
+}
+#myBtn {
+  color: $footerTextColor;
+  text-decoration: underline;
+  cursor: pointer;
+}
