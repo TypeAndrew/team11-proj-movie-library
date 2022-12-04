@@ -12,11 +12,11 @@ const movieSection = document.querySelector('.main-section');
 // formEl.style.display = 'flex';
 // formEl.style.justifyContent = 'center';
 //const galleryEl = document.querySelector('.gallery');
-const galleryEl = document.createElement('div');
-galleryEl.classList.add('gallery');
-movieSection.append(galleryEl);
-let galleryLinkEl = document.createElement('a');
-galleryEl.append(galleryLinkEl);
+// const galleryEl = document.createElement('div');
+// galleryEl.classList.add('gallery');
+// movieSection.append(galleryEl);
+// let galleryLinkEl = document.createElement('a');
+// galleryEl.append(galleryLinkEl);
 
 const apiKey = 'c491b5b8e2b4a9ab13619b0a91f8bb41';
 let markup = '';
@@ -26,18 +26,18 @@ let lenguage = 'en-US';
 let include_adult = false;
 
 //document.body.insertAdjacentHTML("afterend", `<div class="footer"> <button type="button" class="load-more">Load more</button></div>`);
-
+const galleryEl = document.querySelector('.movie__gallery');
 const createMarckup = function (response) {
   response.data.results.map(element => {
-    markup += `<div class="photo-card">
-              <a class="gallery__item" href="https://www.themoviedb.org/t/p/original/${element.backdrop_path}">
-              <img class="gallery__image" src="https://www.themoviedb.org/t/p/original/${element.poster_path}"
-              
-               alt="${element.original_title}" loading="lazy" /></a>
-              <div class="info">
-               
-              </div>
-            </div>`;
+    const genreId = element.genre_ids.map(id => id);
+
+    markup += `<li class="movie__card">
+                <img class="movie__poster" src="https://www.themoviedb.org/t/p/original/${element.poster_path}" alt="${element.original_title}" loading="lazy">
+                <div>
+                    <h2 class="movie__name">${element.title}</h2>
+                    <p class="movie__info">${genreId}<span class="movie__year">${element.release_date.slice(0, 4)}</span></p>
+                </div>
+            </li>`;
   });
 
   return markup;
@@ -91,3 +91,9 @@ formEl.addEventListener('submit', event => {
 
 let request = `https://api.themoviedb.org/3/trending/movie/day?api_key=${apiKey}`;
 getMovies(request);
+
+function getGenre() {
+  const request = `https://api.themoviedb.org/3/genre/movie/list?api_key=${apiKey}&language=en-US`
+  const response = axios.get(request);
+  return response;
+}
