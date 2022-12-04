@@ -8,7 +8,6 @@ import Notiflix from 'notiflix';
 
 const formEl = document.querySelector('.header__form');
 const movieSection = document.querySelector('.main-section');
-const gallery = document.querySelector('.movie__gallery');
 
 let lightbox = new SimpleLightbox('.movie__gallery a', {
   captionsData: 'alt',
