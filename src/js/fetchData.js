@@ -137,6 +137,24 @@ async function showModalMovie(evt) {
   createModalMarkup(requiredMovie);
 
   modalMovie.classList.toggle('is-hidden');
+
+  // Modal close
+  
+  const closeBtn = document.querySelector('.modal__close');
+  closeBtn.addEventListener('click', closeModal);
+  window.addEventListener('keydown', closeModalEsc);
+
+      function closeModalEsc(e) {
+        if (e.code === 'Escape') {
+          modalMovie.classList.toggle('is-hidden');
+          window.removeEventListener('keydown', closeModalEsc);
+        }
+      }
+
+      function closeModal(e) {
+        modalMovie.classList.toggle('is-hidden');
+        window.removeEventListener('keydown', closeModal);
+      }
 }
 
 function createModalMarkup(element) {
