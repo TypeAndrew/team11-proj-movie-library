@@ -50,17 +50,11 @@ a {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  // padding-top: 50px;
 }
 
-// .header__logo {
-//   @media screen and(max-width:767px) {
-//     margin-left: 22px;
-//   }
-//   @media screen and (min-width: 768px) {
-//     margin-left: 32px;
-//   }
-// }
+.header__logo {
+  cursor: pointer;
+}
 
 .header__icon {
   display: inline;
@@ -82,31 +76,31 @@ a {
 
 .header__links {
   display: flex;
-  // @media screen and(max-width:767px) {
-  //   padding-right: 20px;
-  // }
-  // @media screen and (min-width: 768px) {
-  //   padding-right: 33px;
-  // }
 }
 
 .header__home-page {
-  // padding-right: 40px;
-  padding: 10px;
-  margin-right: 20px;
-
+  margin: 10px 30px 10px 10px;
   font-family: 'Roboto';
   font-weight: 500;
   font-size: 12px;
   line-height: 1.16;
   color: #ffffff;
   text-transform: uppercase;
-
+  position: relative;
   cursor: pointer;
+  &::after {
+    position: absolute;
+    content: '';
+    display: block;
+    right: 0;
+    width: 0;
+    height: 3px;
+    background-color: $colorSecondaryActive;
+  }
 }
 
 .header__my-library {
-  padding: 10px;
+  margin: 10px;
 
   font-family: 'Roboto';
   font-weight: 500;
@@ -114,8 +108,23 @@ a {
   line-height: 1.16;
   color: #ffffff;
   text-transform: uppercase;
-
+  position: relative;
   cursor: pointer;
+  &::after {
+    position: absolute;
+    content: '';
+    display: block;
+    right: 0;
+    width: 0;
+    height: 3px;
+    background-color: $colorSecondaryActive;
+  }
+
+  &:hover::after,
+  &:focus::after {
+    width: 100%;
+    left: 0;
+  }
 }
 
 .header__form-input {
@@ -128,10 +137,10 @@ a {
   @media screen and (max-width: 767px) {
     width: 280px;
   }
-  @media screen and (min-width: 768px) and (max-width:1279px) {
+  @media screen and (min-width: 768px) and (max-width: 1279px) {
     width: 336px;
   }
-  @media screen and (min-width:1280px) {
+  @media screen and (min-width: 1280px) {
     width: 393px;
   }
 }
@@ -157,11 +166,26 @@ a {
     margin-top: 60px;
     width: 280px;
   }
-  @media screen and (min-width: 768px) and (max-width:1279px) {
+  @media screen and (min-width: 768px) and (max-width: 1279px) {
     margin-top: 40px;
     width: 336px;
   }
-  @media screen and (min-width:1280px) {
+  @media screen and (min-width: 1280px) {
     width: 393px;
+    margin-top: 40px;
   }
+}
+.current_page {
+  &::after {
+    width: 100%;
+    left: 0;
+    background-color: $colorAlert;
+   
+  }
+}
+.current_page:hover::after{
+  background-color: $colorSecondaryActive;
+}
+.current_page:focus::after{
+  background-color: $colorSecondaryActive;
 }
