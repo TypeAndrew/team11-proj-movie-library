@@ -17,12 +17,25 @@ let counter;
 let total_results = 0;
 let lenguage = 'en-US';
 let include_adult = false;
-
+let genres;
 //document.body.insertAdjacentHTML("afterend", `<div class="footer"> <button type="button" class="load-more">Load more</button></div>`);
 const galleryEl = document.querySelector('.movie__gallery');
+const findGenresById = function(element) {
+  let strGenres = '';
+    let genresLength = element.genre_ids.length;
+    let i =0;
+    const genreId = element.genre_ids.map(id => id).forEach(element => {
+      i++;
+      strGenres = strGenres + genres.find(item => item.id === element).name;
+      genresLength === i ?  undefined : strGenres += ", ";
+      
+    });
+  return strGenres;
+}
+
 const createMarckup = function (response) {
   response.data.results.map(element => {
-    const genreId = element.genre_ids.map(id => id);
+    strGenres = findGenresById(element);
 
     markup += `<li class="movie__card">
     <a href="https://www.themoviedb.org/t/p/original/${
@@ -32,7 +45,7 @@ const createMarckup = function (response) {
     }" alt="${element.original_title}" loading="lazy" id="${element.id}"></a>
     <div>
     <h2 class="movie__name">${element.title}</h2>
-    <p class="movie__info">${genreId}<span class="movie__year">${element.release_date.slice(
+    <p class="movie__info">${strGenres}<span class="movie__year">${element.release_date.slice(
       0,
       4
     )}</span></p>
@@ -47,6 +60,22 @@ const fetchData = async request => {
   return response;
 };
 
+function getGenre() {
+  const request = `https://api.themoviedb.org/3/genre/movie/list?api_key=${apiKey}&language=${lenguage}`;
+  fetchData(request)
+    .then(response => {
+      console.log(response.data);
+        if  (response != undefined) {      
+        genres = response.data.genres;
+          }
+    })
+    .catch(error => {
+      console.log(error);
+    });
+ 
+}
+getGenre(); 
+ 
 const getMovies = function (request) {
   fetchData(request)
     .then(response => {
@@ -84,11 +113,11 @@ formEl.addEventListener('submit', event => {
 let request = `https://api.themoviedb.org/3/trending/movie/day?api_key=${apiKey}`;
 getMovies(request);
 
-function getGenre() {
+/*function getGenre() {
   const request = `https://api.themoviedb.org/3/genre/movie/list?api_key=${apiKey}&language=en-US`;
   const response = axios.get(request);
   return response;
-}
+}*/
 
 galleryEl.addEventListener('click', showModalMovie);
 const modalCard = document.querySelector('.modal__movie');
@@ -113,7 +142,7 @@ async function showModalMovie(evt) {
 function createModalMarkup(element) {
   modalMovie.innerHTML = '';
   const genreId = element.genre_ids.map(id => id);
-
+  strGenres = findGenresById(element);
   const modalMarkup = `<span class="modal__close">&times;</span>
         <img class="modal__poster" src="https://www.themoviedb.org/t/p/original/${element.poster_path}" alt="${element.original_title}" loading="lazy">
         <div class="modal__info-position">
@@ -134,7 +163,7 @@ function createModalMarkup(element) {
                     </tr>
                     <tr>
                         <td class="modal__description-title">Genre</td>
-                        <td class="modal__description-text">${genreId}</td>
+                        <td class="modal__description-text">${strGenres}</td>
                     </tr>
                 </tbody>
             </table>
