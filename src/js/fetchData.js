@@ -9,21 +9,7 @@ import Notiflix from 'notiflix';
 
 const formEl = document.querySelector('.header__form');
 const movieSection = document.querySelector('.main-section');
-
-let lightbox = new SimpleLightbox('.movie__gallery a', {
-  captionsData: 'alt',
-  captionDelay: 250,
-  widthRatio: 0.8,
-});
-// formEl.style.background = 'blue';
-// formEl.style.display = 'flex';
-// formEl.style.justifyContent = 'center';
-//const galleryEl = document.querySelector('.gallery');
-// const galleryEl = document.createElement('div');
-// galleryEl.classList.add('gallery');
-// movieSection.append(galleryEl);
-// let galleryLinkEl = document.createElement('a');
-// galleryEl.append(galleryLinkEl);
+const modalMovie = document.querySelector('.modal__movie');
 
 const apiKey = 'c491b5b8e2b4a9ab13619b0a91f8bb41';
 let markup = '';
@@ -43,7 +29,7 @@ const createMarckup = function (response) {
       element.backdrop_path
     }"><img class="movie__poster" src="https://www.themoviedb.org/t/p/original/${
       element.poster_path
-    }" alt="${element.original_title}" loading="lazy"></a>
+    }" alt="${element.original_title}" loading="lazy" id="${element.id}"></a>
     <div>
     <h2 class="movie__name">${element.title}</h2>
     <p class="movie__info">${genreId}<span class="movie__year">${element.release_date.slice(
@@ -64,22 +50,15 @@ const fetchData = async request => {
 const getMovies = function (request) {
   fetchData(request)
     .then(response => {
-      console.log(response.data);
-
       if (response.data === null) {
         Notiflix.Notify.warning(
           'Sorry, there are no images matching your search query. Please try again.'
         );
       } else {
         galleryEl.innerHTML = createMarckup(response);
-        // document.querySelector('.load-more').style.opacity = '1';
+
         total_results += response.data.length;
-        // let lightbox = new SimpleLightbox('.movie__gallery img', {
-        //   captionsData: 'alt',
-        //   captionDelay: 250,
-        //   widthRatio: 0.8,
-        // });
-        lightbox.refresh();
+
         if (total_results === response.data.total_results) {
           Notiflix.Notify.warning(
             "We're sorry, but you've reached the end of search results."
@@ -109,21 +88,64 @@ function getGenre() {
   const request = `https://api.themoviedb.org/3/genre/movie/list?api_key=${apiKey}&language=en-US`;
   const response = axios.get(request);
   return response;
-<<<<<<< feature/modal-movie-card
 }
 
-// galleryEl.addEventListener('click', showModalMovie);
-// const modalCard = document.querySelector('.modal__movie')
-// const closeBtn = document.querySelector(".modal__close");
+galleryEl.addEventListener('click', showModalMovie);
+const modalCard = document.querySelector('.modal__movie');
+const closeBtn = document.querySelector('.modal__close');
 
-// function showModalMovie(evt) {
-//   evt.preventDefault();
-  
-//   if (evt.target.nodeName !== 'IMG' && evt.target.nodeName !== 'H2') {
-//     return;
-//   }
+async function showModalMovie(evt) {
+  evt.preventDefault();
 
-// }
-=======
+  if (evt.target.nodeName !== 'IMG' && evt.target.nodeName !== 'H2') {
+    return;
+  }
+
+  const movies = await fetchData(request);
+  const requiredMovie = movies.data.results.find(
+    movie => movie.id === Number(evt.target.id)
+  );
+  createModalMarkup(requiredMovie);
+
+  modalMovie.classList.toggle('is-hidden');
 }
->>>>>>> main
+
+function createModalMarkup(element) {
+  modalMovie.innerHTML = '';
+  const genreId = element.genre_ids.map(id => id);
+
+  const modalMarkup = `<span class="modal__close">&times;</span>
+        <img class="modal__poster" src="https://www.themoviedb.org/t/p/original/${element.poster_path}" alt="${element.original_title}" loading="lazy">
+        <div class="modal__info-position">
+            <h2 class="modal__movie-name">${element.title}</h2>
+            <table class="modal__table">
+                <tbody>
+                    <tr>
+                        <td class="modal__description-title">Vote / Votes</td>
+                        <td class="modal__description-text modal__description-text--slash"><span class="modal__span modal__span--rate">${element.vote_average}</span>/<span class="modal__span modal__span--votes">${element.vote_count}</span></td>
+                    </tr>
+                    <tr>
+                        <td class="modal__description-title">Popularity</td>
+                        <td class="modal__description-text">${element.popularity}</td>
+                    </tr>
+                    <tr>
+                        <td class="modal__description-title">Original Title</td>
+                        <td class="modal__description-text">${element.original_title}</td>
+                    </tr>
+                    <tr>
+                        <td class="modal__description-title">Genre</td>
+                        <td class="modal__description-text">${genreId}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div>
+                <h3 class="modal__about-title">About</h3>
+                <p class="modal__about-text">${element.overview}</p>
+            </div>
+            <ul class="modal__btn-container">
+                <li><button class="modal__btn modal__btn--watched" type="button">add to Watched</button></li>
+                <li><button class="modal__btn modal__btn--queue" type="button">add to queue</button></li>
+            </ul>
+        </div>`;
+  modalMovie.insertAdjacentHTML('afterbegin', modalMarkup);
+}
