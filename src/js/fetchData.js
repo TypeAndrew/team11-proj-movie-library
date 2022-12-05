@@ -11,6 +11,12 @@ const formEl = document.querySelector('.header__form');
 const movieSection = document.querySelector('.main-section');
 const modalMovie = document.querySelector('.modal__movie');
 
+const refs = {
+ 
+  warningField: document.querySelector('.js-warning'),
+  
+};
+
 const apiKey = 'c491b5b8e2b4a9ab13619b0a91f8bb41';
 let markup = '';
 let counter;
@@ -70,6 +76,8 @@ function getGenre() {
           }
     })
     .catch(error => {
+      setTimeout(() => refs.warningField.textContent =('Sorry, there are no images matching your search query. Please try again.'), 300);
+      
       console.log(error);
     });
  
@@ -80,22 +88,22 @@ const getMovies = function (request) {
   fetchData(request)
     .then(response => {
       if (response.data === null) {
-        Notiflix.Notify.warning(
+       setTimeout(() => refs.warningField.textContent =(
           'Sorry, there are no images matching your search query. Please try again.'
-        );
+        ), 300);
       } else {
         galleryEl.innerHTML = createMarckup(response);
 
         total_results += response.data.length;
 
         if (total_results === response.data.total_results) {
-          Notiflix.Notify.warning(
-            "We're sorry, but you've reached the end of search results."
-          );
+          refs.warningField.textContent = 'Sorry, there are no images matching your search query. Please try again.'
         }
       }
     })
     .catch(error => {
+      setTimeout(() => refs.warningField.textContent = ('Please write something in the box :)'), 300);
+          
       console.log(error);
     });
 };
