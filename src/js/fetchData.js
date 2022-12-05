@@ -35,7 +35,7 @@ const findGenresById = function(element) {
 
 const createMarckup = function (response) {
   response.data.results.map(element => {
-    strGenres = findGenresById(element);
+    let strGenres = findGenresById(element);
 
     markup += `<li class="movie__card">
     <a href="https://www.themoviedb.org/t/p/original/${
@@ -142,7 +142,7 @@ async function showModalMovie(evt) {
 function createModalMarkup(element) {
   modalMovie.innerHTML = '';
   const genreId = element.genre_ids.map(id => id);
-  strGenres = findGenresById(element);
+  let strGenres = findGenresById(element);
   const modalMarkup = `<span class="modal__close">&times;</span>
         <img class="modal__poster" src="https://www.themoviedb.org/t/p/original/${element.poster_path}" alt="${element.original_title}" loading="lazy">
         <div class="modal__info-position">
