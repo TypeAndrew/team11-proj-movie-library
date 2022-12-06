@@ -49,7 +49,7 @@ const createMarckup = function (response) {
     }"><img class="movie__poster" src="https://www.themoviedb.org/t/p/original/${
       element.poster_path
     }" alt="${element.original_title}" loading="lazy" id="${element.id}"></a>
-    <div>
+    <div class="movie__info">
     <h2 class="movie__name">${element.title}</h2>
     <p class="movie__info">${strGenres}<span class="movie__year">${element.release_date.slice(
       0,
