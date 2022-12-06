@@ -175,6 +175,37 @@ a {
     margin-top: 40px;
   }
 }
+
+.header-warning {
+  
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
+  
+  font-size: 14px;
+  line-height: 1.14;
+
+  @media screen and (max-width: 767px) {
+    max-width: 280px;
+    margin-top: 16px;
+  }
+
+  @media screen and (min-width: 768px) and (max-width:1279px) {
+    width: 393px;
+    text-align: center;
+    margin-top: 20px;
+    
+  }
+
+  @media screen and (min-width:1280px) {
+    width: 393px;
+    text-align: center;
+    margin-top: 20px;
+  }
+
+  color: #FF001B;
+}
+
 .current_page {
   &::after {
     width: 100%;
@@ -189,3 +220,4 @@ a {
 .current_page:focus::after{
   background-color: $colorSecondaryActive;
 }
+
