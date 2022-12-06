@@ -1,0 +1,22 @@
+.movie__card {
+    box-sizing: border-box;
+    border-radius: 5px;
+    transition: all .25s cubic-bezier(.4, 0, .2, 1);
+    box-shadow: 1px 4px 6px rgb(255 107 8 / 17%);
+}
+
+.movie__card:hover {
+    cursor: pointer;
+    opacity: .93;
+    scale: 102%;
+    box-shadow: 2px 4px 8px rgb(255 107 8 / 46%);
+}
+
+.movie__info {
+    margin: 5px 0px 10px 15px;
+}
+
+.movie__name {
+    margin-left: 15px;
+    margin-top: 15px;
+}
