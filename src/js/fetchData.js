@@ -11,6 +11,12 @@ const formEl = document.querySelector('.header__form');
 const movieSection = document.querySelector('.main-section');
 const modalMovie = document.querySelector('.modal__movie');
 
+const refs = {
+ 
+  warningField: document.querySelector('.js-warning'),
+  
+};
+
 const apiKey = 'c491b5b8e2b4a9ab13619b0a91f8bb41';
 let markup = '';
 let counter;
@@ -43,7 +49,7 @@ const createMarckup = function (response) {
     }"><img class="movie__poster" src="https://www.themoviedb.org/t/p/original/${
       element.poster_path
     }" alt="${element.original_title}" loading="lazy" id="${element.id}"></a>
-    <div>
+    <div class="movie__info">
     <h2 class="movie__name">${element.title}</h2>
     <p class="movie__info">${strGenres}<span class="movie__year">${element.release_date.slice(
       0,
@@ -70,6 +76,8 @@ function getGenre() {
           }
     })
     .catch(error => {
+      setTimeout(() => refs.warningField.textContent =('Sorry, there are no images matching your search query. Please try again.'), 300);
+      
       console.log(error);
     });
  
@@ -80,22 +88,22 @@ const getMovies = function (request) {
   fetchData(request)
     .then(response => {
       if (response.data === null) {
-        Notiflix.Notify.warning(
+       setTimeout(() => refs.warningField.textContent =(
           'Sorry, there are no images matching your search query. Please try again.'
-        );
+        ), 300);
       } else {
         galleryEl.innerHTML = createMarckup(response);
 
         total_results += response.data.length;
 
         if (total_results === response.data.total_results) {
-          Notiflix.Notify.warning(
-            "We're sorry, but you've reached the end of search results."
-          );
+          refs.warningField.textContent = 'Sorry, there are no images matching your search query. Please try again.'
         }
       }
     })
     .catch(error => {
+      setTimeout(() => refs.warningField.textContent = ('Please write something in the box :)'), 300);
+          
       console.log(error);
     });
 };
@@ -195,4 +203,108 @@ function createModalMarkup(element) {
             </ul>
         </div>`;
   modalMovie.insertAdjacentHTML('afterbegin', modalMarkup);
+  addToLocalStorage(element);
+}
+
+function addToLocalStorage(element) {
+  const btnAddWatched = document.querySelector('.modal__btn--watched');
+  const btnAddQueue = document.querySelector('.modal__btn--queue');
+  btnAddWatched.addEventListener('click', addToWatched);
+  btnAddQueue.addEventListener('click', addToQueue);
+  let selectMovie = element;
+  let idMovie = element.id;
+  const locallistWatch = 'listToWatch';
+  const locallistQueue = 'listToQueue';
+
+  let wacthlocal = JSON.parse(localStorage.getItem(locallistWatch));
+  let queuelocal = JSON.parse(localStorage.getItem(locallistQueue));
+
+  if (wacthlocal != false) {
+    for (let i = 0; i < wacthlocal.length; i++) {
+      if (wacthlocal[i].id === idMovie) {
+        btnAddWatched.textContent = 'remove from views';
+        btnAddWatched.classList.add('btn_watched_list');
+      }
+    }
+  }
+
+  if (queuelocal != false) {
+    for (let i = 0; i < queuelocal.length; i++) {
+      if (wacthlocal[i].id === idMovie) {
+        btnAddQueue.textContent = 'remove from queue';
+        btnAddQueue.classList.add('btn_queue_list');
+      }
+    }
+  }
+
+  function addToWatched() {
+    let localStoragetoWatchList = localStorage.getItem(locallistWatch);
+    if (localStoragetoWatchList == null) {
+      localStoragetoWatchList = [];
+    } else {
+      localStoragetoWatchList = JSON.parse(localStoragetoWatchList);
+    }
+
+    let indexMovie;
+
+    for (let i = 0; i < localStoragetoWatchList.length; i++) {
+      if (localStoragetoWatchList[i].id === idMovie) {
+        indexMovie = i;
+      }
+    }
+
+    if (indexMovie !== undefined) {
+      localStoragetoWatchList.splice(indexMovie, 1);
+
+      localStorage.setItem(
+        locallistWatch,
+        JSON.stringify(localStoragetoWatchList)
+      );
+      btnAddWatched.textContent = 'add to Watched';
+      btnAddWatched.classList.remove('btn_watched_list');
+    } else {
+      localStoragetoWatchList.push(selectMovie);
+      localStorage.setItem(
+        locallistWatch,
+        JSON.stringify(localStoragetoWatchList)
+      );
+      btnAddWatched.textContent = 'remove from views';
+        btnAddWatched.classList.add('btn_watched_list');
+    }
+  }
+  function addToQueue() {
+    let localStoragetoQueueList = localStorage.getItem(locallistQueue);
+    if (localStoragetoQueueList == null) {
+      localStoragetoQueueList = [];
+    } else {
+      localStoragetoQueueList = JSON.parse(localStoragetoQueueList);
+    }
+
+    let indexMovie;
+
+    for (let i = 0; i < localStoragetoQueueList.length; i++) {
+      if (localStoragetoQueueList[i].id === idMovie) {
+        indexMovie = i;
+      }
+    }
+
+    if (indexMovie !== undefined) {
+      localStoragetoQueueList.splice(indexMovie, 1);
+
+      localStorage.setItem(
+        locallistQueue,
+        JSON.stringify(localStoragetoQueueList)
+      );
+      btnAddQueue.textContent = 'add to queue';
+       btnAddQueue.classList.remove('btn_queue_list');
+    } else {
+      localStoragetoQueueList.push(selectMovie);
+      localStorage.setItem(
+        locallistQueue,
+        JSON.stringify(localStoragetoQueueList)
+      );
+      btnAddQueue.textContent = 'remove from queue';
+        btnAddQueue.classList.add('btn_queue_list');
+    }
+  }
 }

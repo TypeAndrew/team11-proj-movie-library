@@ -38,6 +38,7 @@
   height: 402px;
   border-radius: 5px;
   margin-bottom: 10px;
+  cursor: pointer;
 
   @media screen and (min-width: 768px) {
     width: 336px;
@@ -57,6 +58,7 @@
   line-height: 1.17;
   text-transform: uppercase;
   margin-bottom: 3px;
+  cursor: pointer;
 
   color: #000000;
   @media screen and (min-width: 768px) {
@@ -97,7 +99,6 @@
   left: 50%;
   transform: translate(-50%, -50%) scale(1);
   height: auto;
-  overflow: auto;
 
   width: 280px;
   max-height: 940px;
@@ -105,12 +106,18 @@
   background-color: #fff;
   padding: 48px 20px 40px 20px;
 
+  @media screen and (max-height: 750px) {
+    max-height: 560px;
+    overflow-y: auto;
+  }
+
   @media screen and (min-width: 768px) {
     display: flex;
 
     padding: 40px 40px 40px 36px;
     width: 704px;
     max-height: 552px;
+    overflow-y: unset;
   }
 
   @media screen and (min-width: 1280px) {
@@ -139,6 +146,11 @@
   @media (max-width: 768px) {
     left: 89%;
   }
+
+  &:hover,
+  &:focus {
+    color: #000000;
+  }
 }
 
 .modal__poster {
@@ -151,6 +163,7 @@
     width: 264px;
     height: 373.55px;
     margin-right: 68px;
+    margin-bottom: 0;
   }
 
   @media screen and (min-width: 1280px) {
@@ -267,6 +280,7 @@
     
   text-transform: uppercase;
   border: none;
+  cursor: pointer;
 
   &--watched {
     color: #ffffff;
