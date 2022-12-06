@@ -75,9 +75,7 @@ function getGenre() {
         genres = response.data.genres;
           }
     })
-    .catch(error => {
-      setTimeout(() => refs.warningField.textContent =('Sorry, there are no images matching your search query. Please try again.'), 300);
-      
+    .catch(error => {  
       console.log(error);
     });
  
@@ -87,22 +85,24 @@ getGenre();
 const getMovies = function (request) {
   fetchData(request)
     .then(response => {
-      if (response.data === null) {
-       setTimeout(() => refs.warningField.textContent =(
-          'Sorry, there are no images matching your search query. Please try again.'
-        ), 300);
+      
+      if (response.data.total_results === 0) {
+        
+        refs.warningField.textContent = 'Sorry, there are no images matching your search query. Please try again.';
+        setTimeout(() => refs.warningField.textContent = '', 3000);
       } else {
         galleryEl.innerHTML = createMarckup(response);
 
-        total_results += response.data.length;
+        // total_results += response.data.length;
 
-        if (total_results === response.data.total_results) {
-          refs.warningField.textContent = 'Sorry, there are no images matching your search query. Please try again.'
-        }
+        // if (total_results === response.data.total_results) {
+          
+        // }
       }
     })
     .catch(error => {
-      setTimeout(() => refs.warningField.textContent = ('Please write something in the box :)'), 300);
+      refs.warningField.textContent = 'Please write something in the box :)'
+      setTimeout(() => refs.warningField.textContent = '', 3000);
           
       console.log(error);
     });
