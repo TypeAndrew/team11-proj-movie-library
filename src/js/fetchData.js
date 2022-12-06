@@ -108,6 +108,7 @@ const getMovies = function (request) {
     });
 };
 
+if (formEl !== null) {
 formEl.addEventListener('submit', event => {
   event.preventDefault();
   markup = '';
@@ -120,16 +121,18 @@ formEl.addEventListener('submit', event => {
 
 let request = `https://api.themoviedb.org/3/trending/movie/day?api_key=${apiKey}`;
 getMovies(request);
-
+}
 /*function getGenre() {
   const request = `https://api.themoviedb.org/3/genre/movie/list?api_key=${apiKey}&language=en-US`;
   const response = axios.get(request);
   return response;
 }*/
-
+if (galleryEl !== null) {
 galleryEl.addEventListener('click', showModalMovie);
+}
 const modalCard = document.querySelector('.modal__movie');
-const closeBtn = document.querySelector('.modal__close');
+
+let closeBtn = document.querySelector('.modal__close');
 
 async function showModalMovie(evt) {
   evt.preventDefault();
