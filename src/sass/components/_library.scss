@@ -21,7 +21,6 @@
 }
 
 .my-library__container {
-    max-width: 1024px;
     height: auto;
     margin-inline: auto;
 }
@@ -30,7 +29,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding-top: 50px;
+    padding-top: 20px;
 }
 
 .logo {
@@ -40,6 +39,7 @@
     font-size: 0px;
     color: transparent;
     position: relative;
+    cursor: pointer;
 
     &::before {
         position: absolute;
@@ -71,29 +71,27 @@
     gap: 39px;
 
     &__link {
-        position: relative;
+        
         color: $secondaryColor;
         text-transform: uppercase;
         font-size: 12px;
         line-height: 14px;
         font-weight: 500;
         cursor: pointer;
+
+        &--current{
+            position: relative;
     
-        &::after {
+           &::after {
+            width: 100%;
             position: absolute;
             content: '';
             display: block;
-            right: 0;
-            width: 0;
+            left: 0;
             height: 3px;
             background-color: $colorSecondaryActive;
         }
-
-        &:hover::after,
-        &:focus::after {
-            width: 100%;
-            left: 0;
-        }
+    }
     }
 }
 
