@@ -12,9 +12,7 @@ const movieSection = document.querySelector('.main-section');
 const modalMovie = document.querySelector('.modal__movie');
 
 const refs = {
- 
   warningField: document.querySelector('.js-warning'),
-  
 };
 
 const apiKey = 'c491b5b8e2b4a9ab13619b0a91f8bb41';
@@ -26,18 +24,19 @@ let include_adult = false;
 let genres;
 //document.body.insertAdjacentHTML("afterend", `<div class="footer"> <button type="button" class="load-more">Load more</button></div>`);
 const galleryEl = document.querySelector('.movie__gallery');
-const findGenresById = function(element) {
+const findGenresById = function (element) {
   let strGenres = '';
-    let genresLength = element.genre_ids.length;
-    let i =0;
-    const genreId = element.genre_ids.map(id => id).forEach(element => {
+  let genresLength = element.genre_ids.length;
+  let i = 0;
+  const genreId = element.genre_ids
+    .map(id => id)
+    .forEach(element => {
       i++;
       strGenres = strGenres + genres.find(item => item.id === element).name;
-      genresLength === i ?  undefined : strGenres += ", ";
-      
+      genresLength === i ? undefined : (strGenres += ', ');
     });
   return strGenres;
-}
+};
 
 const createMarckup = function (response) {
   response.data.results.map(element => {
@@ -71,39 +70,52 @@ function getGenre() {
   fetchData(request)
     .then(response => {
       console.log(response.data);
-        if  (response != undefined) {      
+      if (response != undefined) {
         genres = response.data.genres;
-          }
+      }
     })
     .catch(error => {
-      setTimeout(() => refs.warningField.textContent =('Sorry, there are no images matching your search query. Please try again.'), 300);
-      
+      setTimeout(
+        () =>
+          (refs.warningField.textContent =
+            'Sorry, there are no images matching your search query. Please try again.'),
+        300
+      );
+
       console.log(error);
     });
- 
 }
-getGenre(); 
- 
+getGenre();
+
 const getMovies = function (request) {
   fetchData(request)
     .then(response => {
       if (response.data === null) {
-       setTimeout(() => refs.warningField.textContent =(
-          'Sorry, there are no images matching your search query. Please try again.'
-        ), 300);
+        setTimeout(
+          () =>
+            (refs.warningField.textContent =
+              'Sorry, there are no images matching your search query. Please try again.'),
+          300
+        );
       } else {
         galleryEl.innerHTML = createMarckup(response);
 
         total_results += response.data.length;
 
         if (total_results === response.data.total_results) {
-          refs.warningField.textContent = 'Sorry, there are no images matching your search query. Please try again.'
+          refs.warningField.textContent =
+            'Sorry, there are no images matching your search query. Please try again.';
         }
       }
     })
     .catch(error => {
-      setTimeout(() => refs.warningField.textContent = ('Please write something in the box :)'), 300);
-          
+      setTimeout(
+        () =>
+          (refs.warningField.textContent =
+            'Please write something in the box :)'),
+        300
+      );
+
       console.log(error);
     });
 };
@@ -147,22 +159,22 @@ async function showModalMovie(evt) {
   modalMovie.classList.toggle('is-hidden');
 
   // Modal close
-  
+
   const closeBtn = document.querySelector('.modal__close');
   closeBtn.addEventListener('click', closeModal);
   window.addEventListener('keydown', closeModalEsc);
 
-      function closeModalEsc(e) {
-        if (e.code === 'Escape') {
-          modalMovie.classList.toggle('is-hidden');
-          window.removeEventListener('keydown', closeModalEsc);
-        }
-      }
+  function closeModalEsc(e) {
+    if (e.code === 'Escape') {
+      modalMovie.classList.toggle('is-hidden');
+      window.removeEventListener('keydown', closeModalEsc);
+    }
+  }
 
-      function closeModal(e) {
-        modalMovie.classList.toggle('is-hidden');
-        window.removeEventListener('keydown', closeModal);
-      }
+  function closeModal(e) {
+    modalMovie.classList.toggle('is-hidden');
+    window.removeEventListener('keydown', closeModal);
+  }
 }
 
 function createModalMarkup(element) {
@@ -218,7 +230,7 @@ function addToLocalStorage(element) {
 
   let wacthlocal = JSON.parse(localStorage.getItem(locallistWatch));
   let queuelocal = JSON.parse(localStorage.getItem(locallistQueue));
-
+try {
   if (wacthlocal != false) {
     for (let i = 0; i < wacthlocal.length; i++) {
       if (wacthlocal[i].id === idMovie) {
@@ -236,6 +248,10 @@ function addToLocalStorage(element) {
       }
     }
   }
+} catch (error) {
+  
+}
+  
 
   function addToWatched() {
     let localStoragetoWatchList = localStorage.getItem(locallistWatch);
@@ -269,7 +285,7 @@ function addToLocalStorage(element) {
         JSON.stringify(localStoragetoWatchList)
       );
       btnAddWatched.textContent = 'remove from views';
-        btnAddWatched.classList.add('btn_watched_list');
+      btnAddWatched.classList.add('btn_watched_list');
     }
   }
   function addToQueue() {
@@ -296,7 +312,7 @@ function addToLocalStorage(element) {
         JSON.stringify(localStoragetoQueueList)
       );
       btnAddQueue.textContent = 'add to queue';
-       btnAddQueue.classList.remove('btn_queue_list');
+      btnAddQueue.classList.remove('btn_queue_list');
     } else {
       localStoragetoQueueList.push(selectMovie);
       localStorage.setItem(
@@ -304,7 +320,7 @@ function addToLocalStorage(element) {
         JSON.stringify(localStoragetoQueueList)
       );
       btnAddQueue.textContent = 'remove from queue';
-        btnAddQueue.classList.add('btn_queue_list');
+      btnAddQueue.classList.add('btn_queue_list');
     }
   }
 }
