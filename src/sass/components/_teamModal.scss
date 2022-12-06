@@ -16,9 +16,14 @@ p{
     background-color: rgb(0, 0, 0);
     background-color: rgba(0, 0, 0, 0.4);
 
-    @media (max-width: 1199px) {
-            top: 0px;
+    @media (max-width: 767px) {
             position: absolute;
+    
+        }
+
+    @media (min-width: 768px) {
+            top: 0px;
+            position: fixed;
             overflow: auto;
     
         }
@@ -88,12 +93,12 @@ overflow: hidden;
 background-size: contain;
 object-fit: contain;
 
-@media (max-width: 1200px) {
+@media (max-width: 1199px) {
     width: 100px;
     height: 100px;
-}
-}
 
+}
+}
 
 .student-role{
     font-family: Roboto;
