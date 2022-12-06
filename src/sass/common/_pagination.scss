@@ -1,0 +1,26 @@
+$mobile: 320px;
+$tablet: 768px;
+$desctop: 1280px;
+
+
+.tui-pagination {
+    cursor: pointer;
+    
+}
+
+// .tui-page-btn {
+//     // color:#ff8000;
+// }
+
+.tui-pagination .tui-page-btn:hover {
+    background-color:#ff8000;
+    color:#f4f4f4;
+}
+
+
+.tui-pagination .tui-is-selected, .tui-pagination strong {
+    color: #fff;
+    background: #ff8000;
+    border-color: #ff8000;
+    cursor: default;
+}
