@@ -4,16 +4,24 @@ p{
 }
 
 .modal {
-    display: none;
+    position: absolute;
     position: fixed;
+    display: none;
     z-index: 1;
     left: 0;
-    top: 0;
+    top: 0px;
     width: 100%;
     height: auto;
     overflow: auto;
     background-color: rgb(0, 0, 0);
     background-color: rgba(0, 0, 0, 0.4);
+
+    @media (max-width: 1199px) {
+            top: 0px;
+            position: absolute;
+            overflow: auto;
+    
+        }
 }
 
 .modal-content {
@@ -33,6 +41,10 @@ p{
     height: 100%;
     padding-top: 40px;
     padding-bottom: 40px;
+
+    @media (max-width: 1199px) {
+        gap: 10px;
+    }
    
 }
 
@@ -59,7 +71,6 @@ p{
     cursor: pointer;
 }
 
-
 .main-photo-thumb{
     display: flex;
     align-items: center;
@@ -75,6 +86,12 @@ border-radius: 50%;
 background-color: rgb(152, 144, 144);
 overflow: hidden;
 background-size: contain;
+object-fit: contain;
+
+@media (max-width: 1200px) {
+    width: 100px;
+    height: 100px;
+}
 }
 
 
@@ -85,5 +102,100 @@ background-size: contain;
 
 .student-name{
     font-family: Roboto;
+}
+
+.image{
+    object-fit: cover;
     
+}
+
+.besarab{
+    height: 250px;
+    width: 130px;
+
+    @media (max-width: 1199px) {
+        width: 100px;
+        height: 200px;
+    }
+    
+}
+
+.kuprichenkov{
+    height: 150px;
+    width: 130px;
+
+    @media (max-width: 1199px) {
+            width: 110px;
+            height: 100px;
+        }
+}
+
+.gavva{
+    height: 250px;
+    width: 130px;
+
+    @media (max-width: 1199px) {
+            width: 100px;
+            height: 150px;
+        }
+}
+
+.oliinyk{
+    height: 250px;
+    width: 130px;
+
+    @media (max-width: 1199px) {
+            width: 100px;
+            height: 150px;
+        }
+}
+
+.vasylenko{
+    height: 120px;
+    width: 130px;
+
+    @media (max-width: 1199px) {
+            width: 100px;
+            height: 100px;
+        }
+}
+
+.herlovan{
+    height: 130px;
+    width: 120px;
+
+    @media (max-width: 1199px) {
+            width: 100px;
+            height: 100px;
+        }
+}
+
+.filipchenko{
+    height: 200px;
+    width: 120px;
+
+    @media (max-width: 1199px) {
+            width: 100px;
+            height: 100px;
+        }
+}
+
+.starunsky{
+    height: 120px;
+    width: 120px;
+    
+        @media (max-width: 1199px) {
+            width: 100px;
+            height: 100px;
+        }
+}
+
+.shulyar{
+    height: 130px;
+    width: 120px;
+    
+        @media (max-width: 1199px) {
+            width: 100px;
+            height: 100px;
+        }
 }
