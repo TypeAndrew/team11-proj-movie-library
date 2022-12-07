@@ -4,3 +4,4 @@ import './js/movieModal';
 import { teamModal } from './js/teamModal.js';
 import { pagination } from './js/pagination.js';
 import './js/spinner';
+import './js/colorTheme';
