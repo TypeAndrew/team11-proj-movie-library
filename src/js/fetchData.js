@@ -4,15 +4,16 @@
 import MovieApiService from './movies-service';
 import { createMarkup, createModalMarkup, getMovies } from './markup';
 import { formEl, modalMovie, galleryEl, closeBtn } from './refs';
-
+console.log(formEl.elements);
 const movieService = new MovieApiService();
 
-const apiKey = 'c491b5b8e2b4a9ab13619b0a91f8bb41';
+const API_KEY = 'c491b5b8e2b4a9ab13619b0a91f8bb41';
+const BASE_URL = 'https://api.themoviedb.org/3/';
 let markup = '';
 let counter;
-let language = 'en-US';
-let include_adult = false;
-let request = `https://api.themoviedb.org/3/trending/movie/day?api_key=${apiKey}`;
+const language = 'en-US';
+const include_adult = false;
+let request = `${BASE_URL}trending/movie/day?api_key=${API_KEY}`;
 
 movieService.getGenre();
 
@@ -25,7 +26,9 @@ function onFormSubmit(event) {
   markup = '';
   total_results = 0;
   counter = 1;
-  let request = `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&language=${language}&page=${counter}&include_adult=${include_adult}&query=${formEl[0].value}`;
+
+  movieService.query = formEl.elements.searchmovies.value;
+  let request = `${BASE_URL}search/movie?api_key=${API_KEY}&language=${language}&page=${counter}&include_adult=${include_adult}&query=${movieService.query}`;
 
   getMovies(request);
 }

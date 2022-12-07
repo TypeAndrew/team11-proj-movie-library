@@ -22,7 +22,7 @@ export default class MovieApiService {
   }
 
   set query(newQuery) {
-    this.query = newQuery;
+    this.searchQuery = newQuery;
   }
 
   fetchMovies(url) {
