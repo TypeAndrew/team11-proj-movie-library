@@ -22,6 +22,7 @@ let total_results = 0;
 let lenguage = 'en-US';
 let include_adult = false;
 let genres;
+let request = `https://api.themoviedb.org/3/trending/movie/day?api_key=${apiKey}`;
 //document.body.insertAdjacentHTML("afterend", `<div class="footer"> <button type="button" class="load-more">Load more</button></div>`);
 const galleryEl = document.querySelector('.movie__gallery');
 const findGenresById = function (element) {
@@ -75,7 +76,7 @@ function getGenre() {
       }
     })
 
-    .catch(error => {  
+    .catch(error => {
       console.log(error);
     });
 }
@@ -84,45 +85,41 @@ getGenre();
 const getMovies = function (request) {
   fetchData(request)
     .then(response => {
-      
       if (response.data.total_results === 0) {
-        
-        refs.warningField.textContent = 'Sorry, there are no images matching your search query. Please try again.';
-        setTimeout(() => refs.warningField.textContent = '', 3000);
-
+        refs.warningField.textContent =
+          'Sorry, there are no images matching your search query. Please try again.';
+        setTimeout(() => (refs.warningField.textContent = ''), 3000);
       } else {
         galleryEl.innerHTML = createMarckup(response);
 
         // total_results += response.data.length;
 
-
         // if (total_results === response.data.total_results) {
-          
+
         // }
       }
     })
     .catch(error => {
-      refs.warningField.textContent = 'Please write something in the box :)'
-      setTimeout(() => refs.warningField.textContent = '', 3000);
-          
+      refs.warningField.textContent = 'Please write something in the box :)';
+      setTimeout(() => (refs.warningField.textContent = ''), 3000);
 
       console.log(error);
     });
 };
 
 if (formEl !== null) {
-formEl.addEventListener('submit', event => {
-  event.preventDefault();
-  markup = '';
-  total_results = 0;
-  counter = 1;
-  let request = `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&language=${lenguage}&page=${counter}&include_adult=${include_adult}&query=${formEl[0].value}`;
+  formEl.addEventListener('submit', event => {
+    event.preventDefault();
+    markup = '';
+    total_results = 0;
+    counter = 1;
+    let request = `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&language=${lenguage}&page=${counter}&include_adult=${include_adult}&query=${formEl[0].value}`;
 
+    getMovies(request);
+  });
+
+  // let request = `https://api.themoviedb.org/3/trending/movie/day?api_key=${apiKey}`;
   getMovies(request);
-});
-
-let request = `https://api.themoviedb.org/3/trending/movie/day?api_key=${apiKey}`;
-getMovies(request);
 }
 /*function getGenre() {
   const request = `https://api.themoviedb.org/3/genre/movie/list?api_key=${apiKey}&language=en-US`;
@@ -130,7 +127,7 @@ getMovies(request);
   return response;
 }*/
 if (galleryEl !== null) {
-galleryEl.addEventListener('click', showModalMovie);
+  galleryEl.addEventListener('click', showModalMovie);
 }
 const modalCard = document.querySelector('.modal__movie');
 
@@ -223,28 +220,25 @@ function addToLocalStorage(element) {
 
   let wacthlocal = JSON.parse(localStorage.getItem(locallistWatch));
   let queuelocal = JSON.parse(localStorage.getItem(locallistQueue));
-try {
-  if (wacthlocal != false) {
-    for (let i = 0; i < wacthlocal.length; i++) {
-      if (wacthlocal[i].id === idMovie) {
-        btnAddWatched.textContent = 'remove from views';
-        btnAddWatched.classList.add('btn_watched_list');
+  try {
+    if (wacthlocal != false) {
+      for (let i = 0; i < wacthlocal.length; i++) {
+        if (wacthlocal[i].id === idMovie) {
+          btnAddWatched.textContent = 'remove from views';
+          btnAddWatched.classList.add('btn_watched_list');
+        }
       }
     }
-  }
 
-  if (queuelocal != false) {
-    for (let i = 0; i < queuelocal.length; i++) {
-      if (wacthlocal[i].id === idMovie) {
-        btnAddQueue.textContent = 'remove from queue';
-        btnAddQueue.classList.add('btn_queue_list');
+    if (queuelocal != false) {
+      for (let i = 0; i < queuelocal.length; i++) {
+        if (wacthlocal[i].id === idMovie) {
+          btnAddQueue.textContent = 'remove from queue';
+          btnAddQueue.classList.add('btn_queue_list');
+        }
       }
     }
-  }
-} catch (error) {
-  
-}
-  
+  } catch (error) {}
 
   function addToWatched() {
     let localStoragetoWatchList = localStorage.getItem(locallistWatch);
