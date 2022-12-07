@@ -18,7 +18,6 @@ let markup = '';
 let counter;
 let lenguage = 'en-US';
 let include_adult = false;
-let genres;
 let request = `https://api.themoviedb.org/3/trending/movie/day?api_key=${apiKey}`;
 
 const createMarkup = function (response) {
@@ -119,7 +118,7 @@ async function showModalMovie(evt) {
 function createModalMarkup(element) {
   modalMovie.innerHTML = '';
   let strGenres = movieService.findGenresById(element);
-  const modalMarkup = `<span class="modal__close">&times;</span>
+  const modalMarkup = `<button class="modal__close">&times;</button>
         <img class="modal__poster" src="https://www.themoviedb.org/t/p/original/${element.poster_path}" alt="${element.original_title}" loading="lazy">
         <div class="modal__info-position">
             <h2 class="modal__movie-name">${element.title}</h2>

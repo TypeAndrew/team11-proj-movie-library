@@ -143,13 +143,20 @@
   font-weight: bold;
   cursor: pointer;
 
+  background-color: transparent;
+  border: none;
+  border-radius: 50%;
+
+  padding: 0 8px;
+
   @media (max-width: 768px) {
     left: 89%;
   }
 
   &:hover,
   &:focus {
-    color: #000000;
+    color: $accentColor;
+    background-color: #4b4949;
   }
 }
 
@@ -177,7 +184,7 @@
   font-size: 20px;
   line-height: 1.15;
   margin-bottom: 20px;
-  
+
   color: #000000;
 
   @media screen and (min-width: 1280px) {
@@ -190,8 +197,8 @@
   font-size: 12px;
   line-height: 1.33;
   width: 108px;
-  
-  color: #8C8C8C;
+
+  color: #8c8c8c;
 
   @media screen and (min-width: 1280px) {
     width: 152px;
@@ -209,7 +216,7 @@
   color: #000000;
 
   &--slash {
-    color: #8C8C8C;
+    color: #8c8c8c;
   }
 }
 
@@ -253,7 +260,7 @@
   }
 
   &--votes {
-    background-color: #F7F7F7;
+    background-color: #f7f7f7;
     color: #000000;
   }
 }
@@ -268,7 +275,7 @@
   @media screen and (min-width: 1280px) {
     margin-left: 8px;
   }
-} 
+}
 
 .modal__btn {
   width: 110px;
@@ -277,7 +284,7 @@
 
   font-size: 12px;
   line-height: 1.33;
-    
+
   text-transform: uppercase;
   border: none;
   cursor: pointer;
@@ -293,12 +300,12 @@
     border: 1px solid #000000;
   }
 
-    @media screen and (min-width: 768px) {
-      width: 125px;
-      height: 44px;
-    }
+  @media screen and (min-width: 768px) {
+    width: 125px;
+    height: 44px;
+  }
 
-    @media screen and (min-width: 1280px) {
-      width: 136px;
-    }
+  @media screen and (min-width: 1280px) {
+    width: 136px;
+  }
 }
