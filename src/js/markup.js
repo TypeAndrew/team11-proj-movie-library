@@ -1,5 +1,6 @@
 import MovieApiService from './movies-service';
 import addToLocalStorage from './localStorage-logic';
+import addToFirebase from './firebase';
 import {
     formEl,
     movieSection,
@@ -65,6 +66,7 @@ export function createModalMarkup(element) {
     overview.textContent = `${element.overview}`;
 
     addToLocalStorage(element);
+    addToFirebase(element);
 }
 
 async function getMovies(request) {
