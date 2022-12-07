@@ -125,14 +125,16 @@
     max-height: 558px;
     padding: 40px 12px;
   }
-}
 
-.modal__movie.is-hidden {
+
+&.is-hidden {
   opacity: 0;
   pointer-events: none;
   visibility: hidden;
+  
 }
 
+}
 .modal__close {
   position: absolute;
   left: 95%;
