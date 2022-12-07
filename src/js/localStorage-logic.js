@@ -1,8 +1,6 @@
 import { btnAddWatched, btnAddQueue, closeBtn } from './refs';
 
-
 export default function addToLocalStorage(element) {
-
   const locallistWatch = 'listToWatch';
   const locallistQueue = 'listToQueue';
   let idMovie = element.id;
@@ -54,17 +52,13 @@ export default function addToLocalStorage(element) {
       localStoragetoWatchList = JSON.parse(localStoragetoWatchList);
     }
 
+    let indexMovie;
 
-    function addToWatched() {
-        let localStoragetoWatchList = localStorage.getItem(locallistWatch);
-        if (localStoragetoWatchList == null) {
-            localStoragetoWatchList = [];
-        } else {
-            localStoragetoWatchList = JSON.parse(localStoragetoWatchList);
-        }
-
-        let indexMovie;
-
+    for (let i = 0; i < localStoragetoWatchList.length; i++) {
+      if (localStoragetoWatchList[i].id === idMovie) {
+        indexMovie = i;
+      }
+    }
 
     if (indexMovie !== undefined) {
       localStoragetoWatchList.splice(indexMovie, 1);
@@ -120,28 +114,13 @@ export default function addToLocalStorage(element) {
       localStoragetoQueueList = JSON.parse(localStoragetoQueueList);
     }
 
+    let indexMovie;
 
-        if (indexMovie !== undefined) {
-            localStoragetoWatchList.splice(indexMovie, 1);
-
-            localStorage.setItem(
-                locallistWatch,
-                JSON.stringify(localStoragetoWatchList)
-            );
-            btnAddWatched.textContent = 'add to Watched';
-            btnAddWatched.classList.remove('btn_watched_list');
-        } else {
-            localStoragetoWatchList.push(selectMovie);
-            localStorage.setItem(
-                locallistWatch,
-                JSON.stringify(localStoragetoWatchList)
-            );
-            btnAddWatched.textContent = 'remove from views';
-            btnAddWatched.classList.add('btn_watched_list');
-        }
-
+    for (let i = 0; i < localStoragetoQueueList.length; i++) {
+      if (localStoragetoQueueList[i].id === idMovie) {
+        indexMovie = i;
+      }
     }
-
 
     if (indexMovie !== undefined) {
       localStoragetoQueueList.splice(indexMovie, 1);
@@ -166,101 +145,5 @@ export default function addToLocalStorage(element) {
     }
   }
 
-  // let localStoragetoQueueList = localStorage.getItem(locallistQueue);
-  // if (localStoragetoQueueList == null) {
 
-  //   localStoragetoQueueList = [];
-  // } else {
-  //   localStoragetoQueueList = JSON.parse(localStoragetoQueueList);
-  // }
-  // for (let i = 0; i < localStoragetoQueueList.length; i++) {
-  //   if (localStoragetoQueueList[i].id === idMovie) {
-  //     console.log('find');
-  //     setTimeout(() => {
-  //       btnAddQueue.textContent = 'remove from queue';
-  //       btnAddQueue.classList.add('btn_queue_list');
-  //     }, 0);
-  //   } else {
-  //     btnAddQueue.textContent = 'add to Queue';
-  //     btnAddQueue.classList.remove('btn_watched_list');
-  //   }
-  // }
-
-  // function addToQueue() {
-  //   let localStoragetoQueueList = localStorage.getItem(locallistQueue);
-
-  //   if (localStoragetoQueueList == null) {
-
-  //     localStoragetoQueueList = [];
-  //   } else {
-  //     localStoragetoQueueList = JSON.parse(localStoragetoQueueList);
-  //   }
-
-  //   let indexMovie;
-
-  //   for (let i = 0; i < localStoragetoQueueList.length; i++) {
-  //     if (localStoragetoQueueList[i].id === idMovie) {
-  //       indexMovie = i;
-  //     }
-  //   }
-
-  //   if (indexMovie !== undefined) {
-  //     localStoragetoQueueList.splice(indexMovie, 1);
-
-  //     localStorage.setItem(
-  //       locallistQueue,
-  //       JSON.stringify(localStoragetoQueueList)
-  //     );
-
-  //     btnAddQueue.textContent = 'add to Queue';
-  //     btnAddQueue.classList.remove('btn_queue_list');
-  //   } else {
-  //     localStoragetoQueueList.push(element);
-
-  //     localStorage.setItem(
-  //       locallistQueue,
-  //       JSON.stringify(localStoragetoQueueList)
-  //     );
-
-  //     btnAddQueue.textContent = 'remove from queue';
-  //     btnAddQueue.classList.add('btn_queue_list');
-  //   }
-  // }
-
-  // function addToQueue() {
-  //   let localStoragetoQueueList = localStorage.getItem(locallistQueue);
-  //   if (localStoragetoQueueList == null) {
-  //     localStoragetoQueueList = [];
-  //   } else {
-  //     localStoragetoQueueList = JSON.parse(localStoragetoQueueList);
-  //   }
-
-  //   let indexMovie;
-
-  //   for (let i = 0; i < localStoragetoQueueList.length; i++) {
-  //     if (localStoragetoQueueList[i].id === idMovie) {
-  //       indexMovie = i;
-  //     }
-  //   }
-
-  //   if (indexMovie !== undefined) {
-  //     localStoragetoQueueList.splice(indexMovie, 1);
-
-  //     localStorage.setItem(
-  //       locallistQueue,
-  //       JSON.stringify(localStoragetoQueueList)
-  //     );
-  //     btnAddQueue.textContent = 'add to queue';
-  //     btnAddQueue.classList.remove('btn_queue_list');
-  //   } else {
-  //     localStoragetoQueueList.push(element);
-  //     localStorage.setItem(
-  //       locallistQueue,
-  //       JSON.stringify(localStoragetoQueueList)
-  //     );
-  //     btnAddQueue.textContent = 'remove from queue';
-  //     btnAddQueue.classList.add('btn_queue_list');
-  //   }
-  // }
 }
-
