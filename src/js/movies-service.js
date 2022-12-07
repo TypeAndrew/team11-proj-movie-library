@@ -1,13 +1,7 @@
 import axios from 'axios';
-import {
-  formEl,
-  movieSection,
-  modalMovie,
-  warningField,
-  galleryEl,
-} from './refs';
+import { warningField } from './refs';
 
-const API_KEY = 'c491b5b8e2b4a9ab13619b0a91f8bb41'; 
+const API_KEY = 'c491b5b8e2b4a9ab13619b0a91f8bb41';
 const BASE_URL = 'https://api.themoviedb.org/3/';
 
 // const apiKey = 'c491b5b8e2b4a9ab13619b0a91f8bb41';

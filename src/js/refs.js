@@ -19,8 +19,6 @@ const refs = {
   btnAddWatched: document.querySelector('.modal__btn--watched'),
   btnAddQueue: document.querySelector('.modal__btn--queue'),
   closeBtn: document.querySelector('.modal__close'),
-
-
 };
 
 export const {
