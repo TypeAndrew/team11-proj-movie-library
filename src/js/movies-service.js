@@ -52,13 +52,16 @@ export default class MovieApiService {
     let strGenres = '';
     let genresLength = element.genre_ids.length;
     let i = 0;
-    element.genre_ids
+    element.genre_ids.slice(0, 2)
       .map(id => id)
       .forEach(element => {
         i++;
         strGenres = strGenres + genres.find(item => item.id === element).name;
         genresLength === i ? undefined : (strGenres += ', ');
       });
+    if (strGenres.slice(-2) == ', ') {
+      return strGenres.slice(0, -2)
+    }
     return strGenres;
   }
 }
