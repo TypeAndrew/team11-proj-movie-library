@@ -1,47 +1,29 @@
 //export * from 'fetcData.js'
 
-import SimpleLightbox from 'simplelightbox';
 // Додатковий імпорт стилів
-import 'simplelightbox/dist/simple-lightbox.min.css';
+import MovieApiService from './movies-service';
 import axios from 'axios';
-import Notiflix from 'notiflix';
-// import * as basicLightbox from 'basiclightbox';
+import {
+  formEl,
+  movieSection,
+  modalMovie,
+  warningField,
+  galleryEl,
+} from './refs';
 
-const formEl = document.querySelector('.header__form');
-const movieSection = document.querySelector('.main-section');
-const modalMovie = document.querySelector('.modal__movie');
-
-const refs = {
-  warningField: document.querySelector('.js-warning'),
-};
+const movieService = new MovieApiService();
 
 const apiKey = 'c491b5b8e2b4a9ab13619b0a91f8bb41';
 let markup = '';
 let counter;
-let total_results = 0;
 let lenguage = 'en-US';
 let include_adult = false;
 let genres;
 let request = `https://api.themoviedb.org/3/trending/movie/day?api_key=${apiKey}`;
-//document.body.insertAdjacentHTML("afterend", `<div class="footer"> <button type="button" class="load-more">Load more</button></div>`);
-const galleryEl = document.querySelector('.movie__gallery');
-const findGenresById = function (element) {
-  let strGenres = '';
-  let genresLength = element.genre_ids.length;
-  let i = 0;
-  const genreId = element.genre_ids
-    .map(id => id)
-    .forEach(element => {
-      i++;
-      strGenres = strGenres + genres.find(item => item.id === element).name;
-      genresLength === i ? undefined : (strGenres += ', ');
-    });
-  return strGenres;
-};
 
-const createMarckup = function (response) {
+const createMarkup = function (response) {
   response.data.results.map(element => {
-    let strGenres = findGenresById(element);
+    let strGenres = movieService.findGenresById(element);
 
     markup += `<li class="movie__card">
     <a href="https://www.themoviedb.org/t/p/original/${
@@ -61,47 +43,22 @@ const createMarckup = function (response) {
   return markup;
 };
 
-const fetchData = async request => {
-  const response = await axios.get(request);
-  return response;
-};
-
-function getGenre() {
-  const request = `https://api.themoviedb.org/3/genre/movie/list?api_key=${apiKey}&language=${lenguage}`;
-  fetchData(request)
-    .then(response => {
-      console.log(response.data);
-      if (response != undefined) {
-        genres = response.data.genres;
-      }
-    })
-
-    .catch(error => {
-      console.log(error);
-    });
-}
-getGenre();
+movieService.getGenre();
 
 const getMovies = function (request) {
-  fetchData(request)
+  movieService.fetchMovies(request)
     .then(response => {
       if (response.data.total_results === 0) {
-        refs.warningField.textContent =
-          'Sorry, there are no images matching your search query. Please try again.';
-        setTimeout(() => (refs.warningField.textContent = ''), 3000);
+        warningField.textContent =
+          'Sorry, there are no movies matching your search query. Please try again.';
+        setTimeout(() => (warningField.textContent = ''), 3000);
       } else {
-        galleryEl.innerHTML = createMarckup(response);
-
-        // total_results += response.data.length;
-
-        // if (total_results === response.data.total_results) {
-
-        // }
+        galleryEl.innerHTML = createMarkup(response);
       }
     })
     .catch(error => {
       refs.warningField.textContent = 'Please write something in the box :)';
-      setTimeout(() => (refs.warningField.textContent = ''), 3000);
+      setTimeout(() => (warningField.textContent = ''), 3000);
 
       console.log(error);
     });
@@ -118,20 +75,12 @@ if (formEl !== null) {
     getMovies(request);
   });
 
-  // let request = `https://api.themoviedb.org/3/trending/movie/day?api_key=${apiKey}`;
   getMovies(request);
 }
-/*function getGenre() {
-  const request = `https://api.themoviedb.org/3/genre/movie/list?api_key=${apiKey}&language=en-US`;
-  const response = axios.get(request);
-  return response;
-}*/
+
 if (galleryEl !== null) {
   galleryEl.addEventListener('click', showModalMovie);
 }
-const modalCard = document.querySelector('.modal__movie');
-
-let closeBtn = document.querySelector('.modal__close');
 
 async function showModalMovie(evt) {
   evt.preventDefault();
@@ -140,7 +89,7 @@ async function showModalMovie(evt) {
     return;
   }
 
-  const movies = await fetchData(request);
+  const movies = await movieService.fetchMovies(request);
   const requiredMovie = movies.data.results.find(
     movie => movie.id === Number(evt.target.id)
   );
@@ -169,8 +118,7 @@ async function showModalMovie(evt) {
 
 function createModalMarkup(element) {
   modalMovie.innerHTML = '';
-  const genreId = element.genre_ids.map(id => id);
-  let strGenres = findGenresById(element);
+  let strGenres = movieService.findGenresById(element);
   const modalMarkup = `<span class="modal__close">&times;</span>
         <img class="modal__poster" src="https://www.themoviedb.org/t/p/original/${element.poster_path}" alt="${element.original_title}" loading="lazy">
         <div class="modal__info-position">
@@ -275,6 +223,7 @@ function addToLocalStorage(element) {
       btnAddWatched.classList.add('btn_watched_list');
     }
   }
+
   function addToQueue() {
     let localStoragetoQueueList = localStorage.getItem(locallistQueue);
     if (localStoragetoQueueList == null) {
