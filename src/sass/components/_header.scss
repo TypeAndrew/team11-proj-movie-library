@@ -76,10 +76,17 @@ a {
 
 .header__links {
   display: flex;
+  align-items: baseline;
+
+  & > li {
+    &:not(:last-child) {
+      margin-right: 40px;
+    }
+  }
 }
 
-.header__home-page {
-  margin: 10px 30px 10px 10px;
+.header__link {
+  // margin: 10px 30px 10px 10px;
   font-family: 'Roboto';
   font-weight: 500;
   font-size: 12px;
@@ -88,6 +95,7 @@ a {
   text-transform: uppercase;
   position: relative;
   cursor: pointer;
+
   &::after {
     position: absolute;
     content: '';
@@ -96,34 +104,6 @@ a {
     width: 0;
     height: 3px;
     background-color: $colorSecondaryActive;
-  }
-}
-
-.header__my-library {
-  margin: 10px;
-
-  font-family: 'Roboto';
-  font-weight: 500;
-  font-size: 12px;
-  line-height: 1.16;
-  color: #ffffff;
-  text-transform: uppercase;
-  position: relative;
-  cursor: pointer;
-  &::after {
-    position: absolute;
-    content: '';
-    display: block;
-    right: 0;
-    width: 0;
-    height: 3px;
-    background-color: $colorSecondaryActive;
-  }
-
-  &:hover::after,
-  &:focus::after {
-    width: 100%;
-    left: 0;
   }
 }
 
@@ -177,11 +157,10 @@ a {
 }
 
 .header-warning {
-  
-    align-items: center;
-    margin-left: auto;
-    margin-right: auto;
-  
+  align-items: center;
+  margin-left: auto;
+  margin-right: auto;
+
   font-size: 14px;
   line-height: 1.14;
 
@@ -190,20 +169,19 @@ a {
     margin-top: 16px;
   }
 
-  @media screen and (min-width: 768px) and (max-width:1279px) {
-    width: 393px;
-    text-align: center;
-    margin-top: 20px;
-    
-  }
-
-  @media screen and (min-width:1280px) {
+  @media screen and (min-width: 768px) and (max-width: 1279px) {
     width: 393px;
     text-align: center;
     margin-top: 20px;
   }
 
-  color: #FF001B;
+  @media screen and (min-width: 1280px) {
+    width: 393px;
+    text-align: center;
+    margin-top: 20px;
+  }
+
+  color: #ff001b;
 }
 
 .current_page {
@@ -211,13 +189,11 @@ a {
     width: 100%;
     left: 0;
     background-color: $colorAlert;
-   
   }
 }
-.current_page:hover::after{
+.current_page:hover::after {
   background-color: $colorSecondaryActive;
 }
-.current_page:focus::after{
+.current_page:focus::after {
   background-color: $colorSecondaryActive;
 }
-
