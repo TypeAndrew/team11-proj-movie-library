@@ -14,8 +14,8 @@ galleryEl.addEventListener('click', showModalMovie);
 function modyfyRequest(evt) {
     const findString = document.querySelector('.header__form-input');
     if (findString.value !== "") {
-        // Console.log(evt.target.alt);
-        movieService.query = evt.target.alt;
+        
+        movieService.query = evt.target.alt.replace("#",'');
         request = `${BASE_URL}search/movie?api_key=${API_KEY}&language=${language}&page=${movieService.page}&include_adult=${include_adult}&query=${movieService.query}`;
     }
     return request;

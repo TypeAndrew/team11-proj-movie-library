@@ -65,8 +65,9 @@ export function createModalMarkup(element) {
     genres.textContent = `${strGenres}`;
     overview.textContent = `${element.overview}`;
 
-    addToLocalStorage(element);
     addToFirebase(element);
+    addToLocalStorage(element);
+    
 }
 
 async function getMovies(request) {
