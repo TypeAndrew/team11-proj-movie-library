@@ -2,13 +2,23 @@
 
 // Додатковий імпорт стилів
 import MovieApiService from './movies-service';
-import axios from 'axios';
 import {
   formEl,
   movieSection,
   modalMovie,
   warningField,
   galleryEl,
+  poster,
+  movieTitle,
+  averageVotes,
+  totalVotes,
+  popularity,
+  originalTitle,
+  genres,
+  overview,
+  btnAddWatched,
+  btnAddQueue,
+  closeBtn,
 } from './refs';
 
 const movieService = new MovieApiService();
@@ -23,6 +33,8 @@ let request = `https://api.themoviedb.org/3/trending/movie/day?api_key=${apiKey}
 const createMarkup = function (response) {
   response.data.results.map(element => {
     let strGenres = movieService.findGenresById(element);
+
+    // console.log(element.poster_path);
 
     markup += `<li class="movie__card">
     <a href="https://www.themoviedb.org/t/p/original/${
@@ -45,7 +57,8 @@ const createMarkup = function (response) {
 movieService.getGenre();
 
 const getMovies = function (request) {
-  movieService.fetchMovies(request)
+  movieService
+    .fetchMovies(request)
     .then(response => {
       if (response.data.total_results === 0) {
         warningField.textContent =
@@ -98,66 +111,41 @@ async function showModalMovie(evt) {
 
   // Modal close
 
-  const closeBtn = document.querySelector('.modal__close');
   closeBtn.addEventListener('click', closeModal);
   window.addEventListener('keydown', closeModalEsc);
+}
 
-  function closeModalEsc(e) {
-    if (e.code === 'Escape') {
-      modalMovie.classList.toggle('is-hidden');
-      window.removeEventListener('keydown', closeModalEsc);
-    }
-  }
-
-  function closeModal(e) {
+function closeModalEsc(e) {
+  if (e.code === 'Escape') {
     modalMovie.classList.toggle('is-hidden');
-    window.removeEventListener('keydown', closeModal);
+    window.removeEventListener('keydown', closeModalEsc);
   }
 }
 
+function closeModal(e) {
+  modalMovie.classList.toggle('is-hidden');
+  window.removeEventListener('keydown', closeModal);
+}
+
 function createModalMarkup(element) {
-  modalMovie.innerHTML = '';
   let strGenres = movieService.findGenresById(element);
-  const modalMarkup = `<button class="modal__close">&times;</button>
-        <img class="modal__poster" src="https://www.themoviedb.org/t/p/original/${element.poster_path}" alt="${element.original_title}" loading="lazy">
-        <div class="modal__info-position">
-            <h2 class="modal__movie-name">${element.title}</h2>
-            <table class="modal__table">
-                <tbody>
-                    <tr>
-                        <td class="modal__description-title">Vote / Votes</td>
-                        <td class="modal__description-text modal__description-text--slash"><span class="modal__span modal__span--rate">${element.vote_average}</span>/<span class="modal__span modal__span--votes">${element.vote_count}</span></td>
-                    </tr>
-                    <tr>
-                        <td class="modal__description-title">Popularity</td>
-                        <td class="modal__description-text">${element.popularity}</td>
-                    </tr>
-                    <tr>
-                        <td class="modal__description-title">Original Title</td>
-                        <td class="modal__description-text">${element.original_title}</td>
-                    </tr>
-                    <tr>
-                        <td class="modal__description-title">Genre</td>
-                        <td class="modal__description-text">${strGenres}</td>
-                    </tr>
-                </tbody>
-            </table>
-            <div>
-                <h3 class="modal__about-title">About</h3>
-                <p class="modal__about-text">${element.overview}</p>
-            </div>
-            <ul class="modal__btn-container">
-                <li><button class="modal__btn modal__btn--watched" type="button">add to Watched</button></li>
-                <li><button class="modal__btn modal__btn--queue" type="button">add to queue</button></li>
-            </ul>
-        </div>`;
-  modalMovie.insertAdjacentHTML('afterbegin', modalMarkup);
+
+  if (element.poster_path !== null) {
+    poster.src = `https://www.themoviedb.org/t/p/original/${element.poster_path}`;
+  }
+  poster.alt = `${element.original_title}`;
+  movieTitle.textContent = `${element.title}`;
+  averageVotes.textContent = `${element.vote_average}`;
+  totalVotes.textContent = `${element.vote_count}`;
+  popularity.textContent = `${element.popularity}`;
+  originalTitle.textContent = `${element.original_title}`;
+  genres.textContent = `${strGenres}`;
+  overview.textContent = `${element.overview}`;
+
   addToLocalStorage(element);
 }
 
 function addToLocalStorage(element) {
-  const btnAddWatched = document.querySelector('.modal__btn--watched');
-  const btnAddQueue = document.querySelector('.modal__btn--queue');
   btnAddWatched.addEventListener('click', addToWatched);
   btnAddQueue.addEventListener('click', addToQueue);
   let selectMovie = element;

@@ -1,11 +1,58 @@
 <section class="main-section">
-
-    <div class="modal__movie is-hidden">
+  <div class="modal__movie is-hidden">
+    <button class="modal__close">&times;</button>
+    <img
+      class="modal__poster"
+      src="./images/image-not-found.jpg"
+      alt="#"
+      loading="lazy"
+    />
+    <div class="modal__info-position">
+      <h2 class="modal__movie-name"></h2>
+      <table class="modal__table">
+        <tbody>
+          <tr>
+            <td class="modal__description-title">Vote / Votes</td>
+            <td class="modal__description-text modal__description-text--slash">
+              <span class="modal__span modal__span--rate"></span>/<span
+                class="modal__span modal__span--votes"
+              ></span>
+            </td>
+          </tr>
+          <tr>
+            <td class="modal__description-title">Popularity</td>
+            <td class="modal__description-text popularity"></td>
+          </tr>
+          <tr>
+            <td class="modal__description-title">Original Title</td>
+            <td class="modal__description-text original-title"></td>
+          </tr>
+          <tr>
+            <td class="modal__description-title">Genre</td>
+            <td class="modal__description-text genres"></td>
+          </tr>
+        </tbody>
+      </table>
+      <div>
+        <h3 class="modal__about-title">About</h3>
+        <p class="modal__about-text overview"></p>
+      </div>
+      <ul class="modal__btn-container">
+        <li>
+          <button class="modal__btn modal__btn--watched" type="button">
+            add to Watched
+          </button>
+        </li>
+        <li>
+          <button class="modal__btn modal__btn--queue" type="button">
+            add to queue
+          </button>
+        </li>
+      </ul>
     </div>
+  </div>
 
-    <div class="container">
-        <ul class="movie__gallery">
-            
-        </ul>
-    </div>
+  <div class="container">
+    <ul class="movie__gallery"></ul>
+  </div>
 </section>
