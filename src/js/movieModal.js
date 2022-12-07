@@ -22,7 +22,8 @@ async function showModalMovie(evt) {
   );
   createModalMarkup(requiredMovie);
 
-  modalMovie.classList.toggle('is-hidden');
+  document.body.classList.toggle("is-open");
+  modalMovie.classList.toggle("is-hidden");
 
   // Modal close
 
@@ -32,12 +33,14 @@ async function showModalMovie(evt) {
 
 function closeModalEsc(e) {
   if (e.code === 'Escape') {
-    modalMovie.classList.toggle('is-hidden');
+    document.body.classList.toggle("is-open");
+    modalMovie.classList.toggle("is-hidden");
     window.removeEventListener('keydown', closeModalEsc);
   }
 }
 
 function closeModal(e) {
+  document.body.classList.toggle("is-open");
   modalMovie.classList.toggle('is-hidden');
   window.removeEventListener('keydown', closeModal);
 }
