@@ -1,6 +1,9 @@
 import MovieApiService from './movies-service';
 import addToLocalStorage from './localStorage-logic';
 import {
+  formEl,
+  movieSection,
+  modalMovie,
   warningField,
   galleryEl,
   poster,
@@ -11,11 +14,19 @@ import {
   originalTitle,
   genres,
   overview,
+  btnAddWatched,
+  btnAddQueue,
+  closeBtn,
 } from './refs';
 
 const movieService = new MovieApiService();
 
-export function createMarkup(response) {
+const API_KEY = 'c491b5b8e2b4a9ab13619b0a91f8bb41';
+const BASE_URL = 'https://api.themoviedb.org/3/';
+const language = 'en-US';
+const include_adult = false;
+
+function createMarkup(response) {
   let markup = '';
   response.data.results.map(element => {
     let strGenres = movieService.findGenresById(element);
@@ -56,7 +67,7 @@ export function createModalMarkup(element) {
   addToLocalStorage(element);
 }
 
-export async function getMovies(request) {
+async function getMovies(request) {
   try {
     const response = await movieService.fetchMovies(request);
     if (response.data.total_results === 0) {
@@ -73,3 +84,19 @@ export async function getMovies(request) {
     console.log(error);
   }
 }
+
+function onFormSubmit(event) {
+  event.preventDefault();
+  movieService.query = formEl.elements.searchmovies.value;
+  let request = `${BASE_URL}search/movie?api_key=${API_KEY}&language=${language}&page=${movieService.page}&include_adult=${include_adult}&query=${movieService.query}`;
+
+  getMovies(request);
+}
+
+formEl.addEventListener('submit', onFormSubmit);
+
+let request = `${BASE_URL}trending/movie/day?api_key=${API_KEY}`;
+
+movieService.getGenre();
+
+getMovies(request);

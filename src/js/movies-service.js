@@ -3,6 +3,7 @@ import { warningField } from './refs';
 
 const API_KEY = 'c491b5b8e2b4a9ab13619b0a91f8bb41';
 const BASE_URL = 'https://api.themoviedb.org/3/';
+let request = `${BASE_URL}trending/movie/day?api_key=${API_KEY}`;
 
 // const apiKey = 'c491b5b8e2b4a9ab13619b0a91f8bb41';
 // let markup = '';
@@ -15,6 +16,7 @@ let genres = [];
 export default class MovieApiService {
   constructor() {
     this.searchQuery = '';
+    this.page = 1;
   }
 
   get query() {
