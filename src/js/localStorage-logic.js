@@ -33,8 +33,10 @@ export default function addToLocalStorage(element) {
       console.log('find');
       setTimeout(() => {
         btnAddWatched.textContent = 'remove from views';
+        btnAddWatched.classList.add('btn_watched_list')
       }, 0);
 
+      btnAddWatched.classList.add('btn_watched_list');
       btnAddWatched.classList.add('btn_watched_list');
     } else {
       btnAddWatched.textContent = 'add to Watched';
@@ -95,9 +97,10 @@ export default function addToLocalStorage(element) {
       console.log('find');
       setTimeout(() => {
         btnAddQueue.textContent = 'remove from queue';
+        btnAddQueue.classList.add('btn_queue_list');
       }, 0);
 
-      btnAddQueue.classList.add('btn_queue_list');
+      
     } else {
       btnAddQueue.textContent = 'add to queue';
       btnAddQueue.classList.remove('btn_queue_list');
@@ -144,6 +147,4 @@ export default function addToLocalStorage(element) {
       btnAddQueue.classList.add('btn_queue_list');
     }
   }
-
-
 }
