@@ -7,13 +7,17 @@
     <ul class="header__links">
       <li>
         <a
-          class="header__home-page navigation__link--current"
+          class="header__home-page navigation__link--current header__link"
           href="./index.html"
           >home</a
         >
       </li>
+
       <li>
-        <a class="header__my-library" href="./library.html">my library </a>
+        <a class="header__my-library header__link" href="./library.html"
+          >my library
+        </a>
+
       </li>
     </ul>
   </nav>
@@ -23,6 +27,7 @@
         class="header__form-input"
         type="text"
         placeholder="Movie search"
+        name="searchmovies"
       />
       <button class="header__form-button" type="submit">
         <img src="./images/header/loupe.svg" alt="Loupe" />

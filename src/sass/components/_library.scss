@@ -1,145 +1,142 @@
 .my-library {
-    width: 100%;
-    height: 230px;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-    padding: 20px;
+  width: 100%;
+  height: 230px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  padding: 20px;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
+    url(/src/images/library/header-page2-mobile.png);
+
+  @media screen and (min-width: 768px) {
     background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
-        url(/src/images/library/header-page2-mobile.png);
+      url(/src/images/library/header-page2-tablet@2x.png);
+  }
 
-        @media screen and (min-width: 768px) {
-                    background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
-                        url(/src/images/library/header-page2-tablet@2x.png);
-                
-            }
-
-                 @media screen and (min-width: 1024px) {
-                    background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
-                        url(/src/images/library/header-page2@2x.png);
-                            }
+  @media screen and (min-width: 1024px) {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
+      url(/src/images/library/header-page2@2x.png);
+  }
 }
 
 .my-library__container {
-    height: auto;
-    margin-inline: auto;
+  height: auto;
+  margin-inline: auto;
 }
 
 .my-library-nav {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding-top: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 20px;
 }
 
 .logo {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 0px;
-    color: transparent;
-    position: relative;
-    cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0px;
+  color: transparent;
+  position: relative;
+  cursor: pointer;
 
-    &::before {
-        position: absolute;
-        content: '';
-        display: block;
-        left: 0px;
-        width: 24px;
-        height: 24px;
-        background-image: url('/src/images/library/film.png');
-        background-repeat: no-repeat;
-        background-position: center;
-        outline: none;
-    }
+  &::before {
+    position: absolute;
+    content: '';
+    display: block;
+    left: 0px;
+    width: 24px;
+    height: 24px;
+    background-image: url('/src/images/library/film.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    outline: none;
+  }
 
-        @media screen and (min-width: 768px) {
-       
-            font-size: 30px;
-            line-height: 35px;
-            font-weight: 500;
-            color: $secondaryColor;
-            padding-left: 36px;
-            }
+  @media screen and (min-width: 768px) {
+    font-size: 30px;
+    line-height: 35px;
+    font-weight: 500;
+    color: $secondaryColor;
+    padding-left: 36px;
+  }
 }
 
 .navigation {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 39px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 39px;
 
-    &__link {
-        
-        color: $secondaryColor;
-        text-transform: uppercase;
-        font-size: 12px;
-        line-height: 14px;
-        font-weight: 500;
-        cursor: pointer;
+  &__link {
+    color: $secondaryColor;
+    text-transform: uppercase;
+    font-size: 12px;
+    line-height: 14px;
+    font-weight: 500;
+    cursor: pointer;
 
-        &--current{
-            position: relative;
-    
-           &::after {
-            width: 100%;
-            position: absolute;
-            content: '';
-            display: block;
-            left: 0;
-            height: 3px;
-            background-color: $colorSecondaryActive;
-        }
+    &--current {
+      position: relative;
+
+      &::after {
+        width: 100%;
+        position: absolute;
+        content: '';
+        display: block;
+        left: 0;
+        height: 3px;
+        background-color: $colorSecondaryActive;
+      }
     }
-    }
+  }
 }
 
 .my-library__buttons {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 20px;
-    margin-top: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 40px;
 }
 
 .library__button {
-    width: 130px;
-    height: 44px;
-    border: 1px solid $secondaryColor;
-    border-radius: 5px;
-    color: $secondaryColor;
-    font-size: 12px;
-    line-height: 16px;
-    background: transparent;
-    text-transform: uppercase;
-    cursor: pointer;
+  width: 130px;
+  height: 44px;
+  border: 1px solid $secondaryColor;
+  border-radius: 5px;
+  color: $secondaryColor;
+  font-size: 12px;
+  line-height: 16px;
+  background: transparent;
+  text-transform: uppercase;
+  cursor: pointer;
 
-    &:hover,
-        &:focus {
-            background-color: $colorSecondaryActive;
-            border-color: $colorSecondaryActive;
-            -webkit-box-shadow: 0px 0px 100px -28px rgba(255, 107, 1, 1);
-            -moz-box-shadow: 0px 0px 100px -28px rgba(255, 107, 1, 1);
-            box-shadow: 0px 0px 60px -5px rgba(255, 107, 1, 1);
-        }
+  &:hover,
+  &:focus {
+    background-color: $colorSecondaryActive;
+    border-color: $colorSecondaryActive;
+    -webkit-box-shadow: 0px 0px 100px -28px rgba(255, 107, 1, 1);
+    -moz-box-shadow: 0px 0px 100px -28px rgba(255, 107, 1, 1);
+    box-shadow: 0px 0px 60px -5px rgba(255, 107, 1, 1);
+  }
 }
 
-@media screen and (min-width: 320px) {}
+@media screen and (min-width: 320px) {
+}
 
 @media screen and (min-width: 768px) {
-    .logo {
-        font-size: 30px;
-        line-height: 35px;
-        font-weight: 500;
-        color: $secondaryColor;
-        padding-left: 36px;
-        background-position: 50%;
-    }
+  .logo {
+    font-size: 30px;
+    line-height: 35px;
+    font-weight: 500;
+    color: $secondaryColor;
+    padding-left: 36px;
+    background-position: 50%;
+  }
 
-    .my_library {
-        background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
-            url(/src/images/library/header-page2-tablet@2x.png);
-    }
+  .my_library {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
+      url(/src/images/library/header-page2-tablet@2x.png);
+  }
 }
-

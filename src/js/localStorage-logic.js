@@ -1,6 +1,8 @@
 import { btnAddWatched, btnAddQueue, closeBtn } from './refs';
 
+
 export default function addToLocalStorage(element) {
+
   const locallistWatch = 'listToWatch';
   const locallistQueue = 'listToQueue';
   let idMovie = element.id;
@@ -52,13 +54,17 @@ export default function addToLocalStorage(element) {
       localStoragetoWatchList = JSON.parse(localStoragetoWatchList);
     }
 
-    let indexMovie;
 
-    for (let i = 0; i < localStoragetoWatchList.length; i++) {
-      if (localStoragetoWatchList[i].id === idMovie) {
-        indexMovie = i;
-      }
-    }
+    function addToWatched() {
+        let localStoragetoWatchList = localStorage.getItem(locallistWatch);
+        if (localStoragetoWatchList == null) {
+            localStoragetoWatchList = [];
+        } else {
+            localStoragetoWatchList = JSON.parse(localStoragetoWatchList);
+        }
+
+        let indexMovie;
+
 
     if (indexMovie !== undefined) {
       localStoragetoWatchList.splice(indexMovie, 1);
@@ -114,13 +120,28 @@ export default function addToLocalStorage(element) {
       localStoragetoQueueList = JSON.parse(localStoragetoQueueList);
     }
 
-    let indexMovie;
 
-    for (let i = 0; i < localStoragetoQueueList.length; i++) {
-      if (localStoragetoQueueList[i].id === idMovie) {
-        indexMovie = i;
-      }
+        if (indexMovie !== undefined) {
+            localStoragetoWatchList.splice(indexMovie, 1);
+
+            localStorage.setItem(
+                locallistWatch,
+                JSON.stringify(localStoragetoWatchList)
+            );
+            btnAddWatched.textContent = 'add to Watched';
+            btnAddWatched.classList.remove('btn_watched_list');
+        } else {
+            localStoragetoWatchList.push(selectMovie);
+            localStorage.setItem(
+                locallistWatch,
+                JSON.stringify(localStoragetoWatchList)
+            );
+            btnAddWatched.textContent = 'remove from views';
+            btnAddWatched.classList.add('btn_watched_list');
+        }
+
     }
+
 
     if (indexMovie !== undefined) {
       localStoragetoQueueList.splice(indexMovie, 1);
@@ -242,3 +263,4 @@ export default function addToLocalStorage(element) {
   //   }
   // }
 }
+

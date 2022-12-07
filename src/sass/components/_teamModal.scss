@@ -1,206 +1,199 @@
-p{
-    margin: 0;
-    padding: 0;
+p {
+  margin: 0;
+  padding: 0;
 }
 
 .modal {
+  position: absolute;
+  position: fixed;
+  display: none;
+  z-index: 1;
+  left: 0;
+  top: 0px;
+  width: 100%;
+  height: auto;
+  overflow: auto;
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.4);
+
+  @media (max-width: 767px) {
     position: absolute;
-    position: fixed;
-    display: none;
-    z-index: 1;
-    left: 0;
+  }
+
+  @media (min-width: 768px) {
     top: 0px;
-    width: 100%;
-    height: auto;
+    position: fixed;
     overflow: auto;
-    background-color: rgb(0, 0, 0);
-    background-color: rgba(0, 0, 0, 0.4);
-
-    @media (max-width: 767px) {
-            position: absolute;
-    
-        }
-
-    @media (min-width: 768px) {
-            top: 0px;
-            position: fixed;
-            overflow: auto;
-    
-        }
+  }
 }
 
 .modal-content {
-    position: relative;
-    display: flex;
-    align-content: center;
-    justify-content: space-evenly;
-    flex-wrap: wrap;
-    flex-direction: row;
-    background-color: #fefefe;
-    margin: 15% auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 60%;
-    border-radius: 5px;
-    gap: 30px;
-    height: 100%;
-    padding-top: 40px;
-    padding-bottom: 40px;
+  position: relative;
+  display: flex;
+  align-content: center;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  flex-direction: row;
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 60%;
+  border-radius: 5px;
+  gap: 30px;
+  height: 100%;
+  padding-top: 40px;
+  padding-bottom: 40px;
 
-    @media (max-width: 1199px) {
-        gap: 10px;
-    }
-   
+  @media (max-width: 1199px) {
+    gap: 10px;
+  }
 }
 
 .close {
-    position: absolute;
-    left: 95%;
-    top: 5px;
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
+  @extend .modal__close;
+  //   position: absolute;
+  //   left: 95%;
+  //   top: 5px;
+  //   color: #aaa;
+  //   float: right;
+  //   font-size: 28px;
+  //   font-weight: bold;
 
-    @media (max-width: 768px){
-        left: 89%;
-    }
-
-        
+  @media (max-width: 768px) {
+    left: 89%;
+  }
 }
 
-.close:hover,
-.close:focus {
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
+// .close:hover,
+// .close:focus {
+//   color: black;
+//   text-decoration: none;
+//   cursor: pointer;
+// }
+
+.main-photo-thumb {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 15px;
 }
 
-.main-photo-thumb{
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    gap: 15px;
-}
+.main-photo-thumb__item {
+  width: 120px;
+  height: 120px;
+  border: 1px solid #000;
+  border-radius: 50%;
+  background-color: rgb(152, 144, 144);
+  overflow: hidden;
+  background-size: contain;
+  object-fit: contain;
 
-.main-photo-thumb__item{
-width: 120px;
-height: 120px;
-border: 1px solid #000;
-border-radius: 50%;
-background-color: rgb(152, 144, 144);
-overflow: hidden;
-background-size: contain;
-object-fit: contain;
-
-@media (max-width: 1199px) {
+  @media (max-width: 1199px) {
     width: 100px;
     height: 100px;
-
-}
-}
-
-.student-role{
-    font-family: Roboto;
-    font-weight: 200;
+  }
 }
 
-.student-name{
-    font-family: Roboto;
+.student-role {
+  font-family: Roboto;
+  font-weight: 200;
 }
 
-.image{
-    object-fit: cover;
-    
+.student-name {
+  font-family: Roboto;
 }
 
-.besarab{
-    height: 250px;
-    width: 130px;
-
-    @media (max-width: 1199px) {
-        width: 100px;
-        height: 200px;
-    }
-    
+.image {
+  object-fit: cover;
 }
 
-.kuprichenkov{
-    height: 150px;
-    width: 130px;
+.besarab {
+  height: 250px;
+  width: 130px;
 
-    @media (max-width: 1199px) {
-            width: 110px;
-            height: 100px;
-        }
-}
-
-.gavva{
-    height: 250px;
-    width: 130px;
-
-    @media (max-width: 1199px) {
-            width: 100px;
-            height: 150px;
-        }
-}
-
-.oliinyk{
-    height: 250px;
-    width: 130px;
-
-    @media (max-width: 1199px) {
-            width: 100px;
-            height: 150px;
-        }
-}
-
-.vasylenko{
-    height: 120px;
-    width: 130px;
-
-    @media (max-width: 1199px) {
-            width: 100px;
-            height: 100px;
-        }
-}
-
-.herlovan{
-    height: 130px;
-    width: 120px;
-
-    @media (max-width: 1199px) {
-            width: 100px;
-            height: 100px;
-        }
-}
-
-.filipchenko{
+  @media (max-width: 1199px) {
+    width: 100px;
     height: 200px;
-    width: 120px;
-
-    @media (max-width: 1199px) {
-            width: 100px;
-            height: 100px;
-        }
+  }
 }
 
-.starunsky{
-    height: 120px;
-    width: 120px;
-    
-        @media (max-width: 1199px) {
-            width: 100px;
-            height: 100px;
-        }
+.kuprichenkov {
+  height: 150px;
+  width: 130px;
+
+  @media (max-width: 1199px) {
+    width: 110px;
+    height: 100px;
+  }
 }
 
-.shulyar{
-    height: 130px;
-    width: 120px;
-    
-        @media (max-width: 1199px) {
-            width: 100px;
-            height: 100px;
-        }
+.gavva {
+  height: 250px;
+  width: 130px;
+
+  @media (max-width: 1199px) {
+    width: 100px;
+    height: 150px;
+  }
+}
+
+.oliinyk {
+  height: 250px;
+  width: 130px;
+
+  @media (max-width: 1199px) {
+    width: 100px;
+    height: 150px;
+  }
+}
+
+.vasylenko {
+  height: 120px;
+  width: 130px;
+
+  @media (max-width: 1199px) {
+    width: 100px;
+    height: 100px;
+  }
+}
+
+.herlovan {
+  height: 130px;
+  width: 120px;
+
+  @media (max-width: 1199px) {
+    width: 100px;
+    height: 100px;
+  }
+}
+
+.filipchenko {
+  height: 200px;
+  width: 120px;
+
+  @media (max-width: 1199px) {
+    width: 100px;
+    height: 100px;
+  }
+}
+
+.starunsky {
+  height: 120px;
+  width: 120px;
+
+  @media (max-width: 1199px) {
+    width: 100px;
+    height: 100px;
+  }
+}
+
+.shulyar {
+  height: 130px;
+  width: 120px;
+
+  @media (max-width: 1199px) {
+    width: 100px;
+    height: 100px;
+  }
 }
