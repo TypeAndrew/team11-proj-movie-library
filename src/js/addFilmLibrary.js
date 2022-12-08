@@ -9,12 +9,16 @@ let markup = '';
 let watchedFilms = [];
 let queueFilms = [];
 
+window.addEventListener('load', onBtnWatchedClick());
+
 if (btnWatch && btnQueue) {
   btnWatch.addEventListener('click', onBtnWatchedClick);
   btnQueue.addEventListener('click', onBtnQueueClick);
 }
 
 function onBtnWatchedClick() {
+    btnWatch.classList.add('library__button--active');
+    btnQueue.classList.remove('library__button--active');
   try {
     watchedFilms = localStorage.getItem(locallistWatch);
     if (watchedFilms) {
@@ -56,6 +60,8 @@ function creadListWatch() {
 }
 
 function onBtnQueueClick() {
+    btnWatch.classList.remove('library__button--active');
+    btnQueue.classList.add('library__button--active');
   try {
     queueFilms = localStorage.getItem(locallistQueue);
     if (queueFilms) {
