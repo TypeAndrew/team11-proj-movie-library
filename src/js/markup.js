@@ -4,8 +4,8 @@ import addToFirebase from './firebase';
 
 import {
     formEl,
-    movieSection,
-    modalMovie,
+   // movieSection,
+   // modalMovie,
     warningField,
     galleryEl,
     poster,
@@ -16,9 +16,9 @@ import {
     originalTitle,
     genres,
     overview,
-    btnAddWatched,
-    btnAddQueue,
-    closeBtn,
+   // btnAddWatched,
+  //  btnAddQueue,
+  //  closeBtn,
 } from './refs';
 
 export const movieService = new MovieApiService();
@@ -43,7 +43,7 @@ function createMarkup(response) {
       element.backdrop_path==null?element.poster_path:element.backdrop_path
     }"><img class="movie__poster" src="https://www.themoviedb.org/t/p/original/${
       element.poster_path
-    }" alt="${element.original_title}" loading="lazy" id="${element.id}"></a>
+    }" alt="${element.original_title}" loading="lazy" id="${element.id}" loading="lazy"></a>
     <div class="movie__info">
     <h2 class="movie__name">${element.title}</h2>
     <p class="movie__info">${strGenres}<span class="movie__year">${element.release_date.slice(
