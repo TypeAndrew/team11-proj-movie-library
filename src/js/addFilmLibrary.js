@@ -6,8 +6,8 @@ const locallistWatch = 'listToWatch';
 const locallistQueue = 'listToQueue';
 
 let markup = '';
-let watchedFilms = null;
-let queueFilms = null;
+let watchedFilms = [];
+let queueFilms = [];
 
 if (btnWatch && btnQueue) {
   btnWatch.addEventListener('click', onBtnWatchedClick);
