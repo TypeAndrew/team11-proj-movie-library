@@ -206,3 +206,16 @@ a {
 .current_page:focus::after {
   background-color: $colorSecondaryActive;
 }
+
+.header__flex {
+    display: flex;
+    position: relative;
+}
+
+.header__flex--library {
+  justify-content: flex-end;
+}
+
+.theme-button__container {
+  margin-top: 35px;
+}
