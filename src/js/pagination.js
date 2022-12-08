@@ -1,7 +1,7 @@
 import Pagination from 'tui-pagination';
-import { getMovies, createRequest, movieService, createRequest, totalPages, totalResults } from './markup';
+import {  createRequest, movieService, createRequest,  totalResults } from './markup';
 import { BASE_URL } from './movies-service';
-import { formEl } from './refs';
+//import { formEl } from './refs';
 
 // import 'tui-pagination/dist/tui-pagination.css';
 // const listRef = document.querySelector('.movie-list');

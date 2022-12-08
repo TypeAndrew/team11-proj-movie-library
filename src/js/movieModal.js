@@ -1,6 +1,6 @@
 import { modalMovie, galleryEl, closeBtn } from './refs';
 import MovieApiService from './movies-service';
-//import { createModalMarkup } from './markup';
+import { createModalMarkup } from './markup';
 const movieService = new MovieApiService();
 
 const API_KEY = 'c491b5b8e2b4a9ab13619b0a91f8bb41';
