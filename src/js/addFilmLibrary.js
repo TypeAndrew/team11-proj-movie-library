@@ -1,4 +1,4 @@
-import nothingHereJpg from '/src/images/library/Theres_nothing_here.jpg';
+import nothingHereJpg from '../images/library/Theres_nothing_here.jpg';
 const btnWatch = document.querySelector("#watched")
 const btnQueue = document.querySelector("#queue")
 const elLabrary = document.querySelector(".library__js-card")
@@ -53,14 +53,14 @@ function onBtnWatchedClick() {
 
 function onBtnQueueClick() {
   try {
-    let watchedFilms = localStorage.getItem(locallistQueue);
-    if (watchedFilms) {
-      watchedFilms = JSON.parse(watchedFilms);
+    let queueFilms = localStorage.getItem(locallistQueue);
+    if (queueFilms) {
+      watchedFilms = JSON.parse(queueFilms);
 
-        creadListWatch(watchedFilms);
+        creadListQueue(queueFilms);
 
     }
-    if (watchedFilms.length === 0)  {
+      if(watchedFilms.length === 0)  {
     elLabrary.innerHTML = `<img src="${nothingHereJpg}" alt="Theres nothing" />`;
     
   }
