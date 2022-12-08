@@ -26,7 +26,7 @@ function onBtnWatchedClick() {
       creadListWatch(watchedFilms);
     }
     if (watchedFilms.length === 0) {
-      elLabrary.innerHTML = `<img src="${nothingHereJpg}" alt="Theres nothing" />`;
+      elLabrary.innerHTML = `<img src="${nothingHereJpg}" class="img__nothing-here" alt="Theres nothing" />`;
     }
   } catch (error) {
     console.log(error);

@@ -143,3 +143,17 @@
       url(/src/images/library/header-page2-tablet@2x.png);
   }
 }
+.img__nothing-here{
+  margin: 20px 0;
+    width: 280px;
+  
+    @media screen and (min-width: 768px) {
+      width: 500px;
+      margin: 0;
+    }
+  
+    @media screen and (min-width: 1280px) {
+      width: 700px;
+      margin-bottom: 16px;
+    }
+}
