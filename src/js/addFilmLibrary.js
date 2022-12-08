@@ -6,6 +6,8 @@ const locallistWatch = 'listToWatch';
 const locallistQueue = 'listToQueue';
 
 let markup = '';
+let watchedFilms = null;
+let queueFilms = null;
 
 if (btnWatch && btnQueue) {
   btnWatch.addEventListener('click', onBtnWatchedClick);
@@ -14,7 +16,7 @@ if (btnWatch && btnQueue) {
 
 function onBtnWatchedClick() {
   try {
-    let watchedFilms = localStorage.getItem(locallistWatch);
+    watchedFilms = localStorage.getItem(locallistWatch);
     if (watchedFilms) {
       watchedFilms = JSON.parse(watchedFilms);
       creadListWatch(watchedFilms);
@@ -55,7 +57,7 @@ function creadListWatch() {
 
 function onBtnQueueClick() {
   try {
-    let queueFilms = localStorage.getItem(locallistQueue);
+    queueFilms = localStorage.getItem(locallistQueue);
     if (queueFilms) {
       watchedFilms = JSON.parse(queueFilms);
 
