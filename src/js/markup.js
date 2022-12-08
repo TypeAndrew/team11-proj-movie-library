@@ -1,40 +1,46 @@
 import MovieApiService from './movies-service';
 import addToLocalStorage from './localStorage-logic';
 import addToFirebase from './firebase';
+
 import {
-  formEl,
-  movieSection,
-  modalMovie,
-  warningField,
-  galleryEl,
-  poster,
-  movieTitle,
-  averageVotes,
-  totalVotes,
-  popularity,
-  originalTitle,
-  genres,
-  overview,
-  btnAddWatched,
-  btnAddQueue,
-  closeBtn,
+    formEl,
+    movieSection,
+    modalMovie,
+    warningField,
+    galleryEl,
+    poster,
+    movieTitle,
+    averageVotes,
+    totalVotes,
+    popularity,
+    originalTitle,
+    genres,
+    overview,
+    btnAddWatched,
+    btnAddQueue,
+    closeBtn,
 } from './refs';
 
-const movieService = new MovieApiService();
+export const movieService = new MovieApiService();
 
 const API_KEY = 'c491b5b8e2b4a9ab13619b0a91f8bb41';
 const BASE_URL = 'https://api.themoviedb.org/3/';
 const language = 'en-US';
 const include_adult = false;
+let request = `${BASE_URL}trending/movie/day?api_key=${API_KEY}&page=${movieService.page}`;
+export let totalPages = 0;
+export let totalResults = 0;
 
 function createMarkup(response) {
-  let markup = '';
-  response.data.results.map(element => {
-    let strGenres = movieService.findGenresById(element);
+    let markup = '';
+    totalPages = response.data.total_pages;
+    totalResults = response.data.total_results;
+    response.data.results.map(element => {
+        let strGenres = movieService.findGenresById(element);
 
-    markup += `<li class="movie__card">
+        markup += `<li class="movie__card">
     <a href="https://www.themoviedb.org/t/p/original/${
-      element.backdrop_path
+      element.backdrop_path==null?element.poster_path:element.backdrop_path
     }"><img class="movie__poster" src="https://www.themoviedb.org/t/p/original/${
       element.poster_path
     }" alt="${element.original_title}" loading="lazy" id="${element.id}"></a>
@@ -46,61 +52,70 @@ function createMarkup(response) {
     )}</span></p>
     </div>
     </li>`;
-  });
-  return markup;
+    });
+
+
+    return markup;
 }
 
 export function createModalMarkup(element) {
-  let strGenres = movieService.findGenresById(element);
+    let strGenres = movieService.findGenresById(element);
 
-  if (element.poster_path !== null) {
-    poster.src = `https://www.themoviedb.org/t/p/original/${element.poster_path}`;
-  }
-  poster.alt = `${element.original_title}`;
-  movieTitle.textContent = `${element.title}`;
-  averageVotes.textContent = `${element.vote_average}`;
-  totalVotes.textContent = `${element.vote_count}`;
-  popularity.textContent = `${element.popularity}`;
-  originalTitle.textContent = `${element.original_title}`;
-  genres.textContent = `${strGenres}`;
-  overview.textContent = `${element.overview}`;
+    if (element.poster_path !== null) {
+        poster.src = `https://www.themoviedb.org/t/p/original/${element.poster_path}`;
+    }
+    poster.alt = `${element.original_title}`;
+    movieTitle.textContent = `${element.title}`;
+    averageVotes.textContent = `${element.vote_average}`;
+    totalVotes.textContent = `${element.vote_count}`;
+    popularity.textContent = `${element.popularity}`;
+    originalTitle.textContent = `${element.original_title}`;
+    genres.textContent = `${strGenres}`;
+    overview.textContent = `${element.overview}`;
 
-  addToFirebase(element);
-  addToLocalStorage(element);
+    addToFirebase(element);
+    addToLocalStorage(element);
 }
 
 async function getMovies(request) {
-  try {
-    const response = await movieService.fetchMovies(request);
-    if (response.data.total_results === 0) {
-      warningField.textContent =
-        'Sorry, there are no movies matching your search query. Please try again.';
-      setTimeout(() => (warningField.textContent = ''), 3000);
-    } else {
-      galleryEl.innerHTML = createMarkup(response);
+    try {
+        const response = await movieService.fetchMovies(request);
+        if (response.data.total_results === 0) {
+            warningField.textContent =
+                'Sorry, there are no movies matching your search query. Please try again.';
+            setTimeout(() => (warningField.textContent = ''), 3000);
+        } else {
+            galleryEl.innerHTML = createMarkup(response);
+        }
+    } catch (error) {
+        warningField.textContent = 'Please write something in the box :)';
+        // setTimeout(() => (warningField.textContent = ''), 3000);
+
+        console.log(error);
     }
-  } catch (error) {
-    warningField.textContent = 'Please write something in the box :)';
-    setTimeout(() => (warningField.textContent = ''), 3000);
-
-    console.log(error);
-  }
 }
 
-function onFormSubmit(event) {
-  event.preventDefault();
-  movieService.query = formEl.elements.searchmovies.value;
-
-  let request = `${BASE_URL}search/movie?api_key=${API_KEY}&language=${language}&page=${movieService.page}&include_adult=${include_adult}&query=${movieService.query}`;
-  getMovies(request);
+export function createRequest(page = 1) {
+    let query = formEl.elements.searchmovies.value;
+    console.log(movieService);
+    if (query !== "") {
+        request = `${BASE_URL}search/movie?api_key=${API_KEY}&language=${language}&page=${movieService.page}&include_adult=${include_adult}&query=${query}`;
+        getMovies(request);
+    } else {
+        request = `${BASE_URL}trending/movie/day?api_key=${API_KEY}&page=${movieService.page}`;
+        getMovies(request);
+    }
 }
 
-let request = `${BASE_URL}trending/movie/day?api_key=${API_KEY}`;
+function onFormSubmit(event, request) {
+    event.preventDefault();
+    createRequest(event.page);
+}
 
 if (formEl) {
-  formEl.addEventListener('submit', onFormSubmit);
+    formEl.addEventListener('submit', onFormSubmit);
 
-  movieService.getGenre();
+    movieService.getGenre();
 
-  getMovies(request);
+    createRequest();
 }
