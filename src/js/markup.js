@@ -1,11 +1,9 @@
 import MovieApiService from './movies-service';
 import addToLocalStorage from './localStorage-logic';
 import addToFirebase from './firebase';
-
+import { changeFirstPage } from './pagination';
 import {
     formEl,
-    movieSection,
-    modalMovie,
     warningField,
     galleryEl,
     poster,
@@ -16,10 +14,9 @@ import {
     originalTitle,
     genres,
     overview,
-    btnAddWatched,
-    btnAddQueue,
-    closeBtn,
+   
 } from './refs';
+import { pagination } from './pagination';
 
 export const movieService = new MovieApiService();
 
@@ -28,6 +25,7 @@ const BASE_URL = 'https://api.themoviedb.org/3/';
 const language = 'en-US';
 const include_adult = false;
 let request = `${BASE_URL}trending/movie/day?api_key=${API_KEY}&page=${movieService.page}`;
+export let firstPage = false;
 export let totalPages = 0;
 export let totalResults = 0;
 
@@ -53,7 +51,6 @@ function createMarkup(response) {
     </div>
     </li>`;
     });
-
 
     return markup;
 }
@@ -89,19 +86,21 @@ async function getMovies(request) {
         }
     } catch (error) {
         warningField.textContent = 'Please write something in the box :)';
-        // setTimeout(() => (warningField.textContent = ''), 3000);
+         setTimeout(() => (warningField.textContent = ''), 3000);
 
         console.log(error);
     }
 }
 
-export function createRequest(page = 1) {
+export function createRequest() {
     let query = formEl.elements.searchmovies.value;
-    console.log(movieService);
-    if (query !== "") {
+   // console.log(movieService);
+    if (query !== "" && query !== undefined)  {
+      
         request = `${BASE_URL}search/movie?api_key=${API_KEY}&language=${language}&page=${movieService.page}&include_adult=${include_adult}&query=${query}`;
         getMovies(request);
     } else {
+        firstPage = false;
         request = `${BASE_URL}trending/movie/day?api_key=${API_KEY}&page=${movieService.page}`;
         getMovies(request);
     }
@@ -109,6 +108,8 @@ export function createRequest(page = 1) {
 
 function onFormSubmit(event, request) {
     event.preventDefault();
+    changeFirstPage();
+    movieService.page = 1;
     createRequest(event.page);
 }
 

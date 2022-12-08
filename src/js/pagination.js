@@ -1,19 +1,13 @@
 import Pagination from 'tui-pagination';
-import { getMovies, createRequest, movieService, createRequest, totalPages, totalResults } from './markup';
-import { BASE_URL } from './movies-service';
-import { formEl } from './refs';
+import { createRequest, movieService, createRequest, totalResults, firstPage} from './markup';
 
-// import 'tui-pagination/dist/tui-pagination.css';
-// const listRef = document.querySelector('.movie-list');
-const paginationSection = document.querySelector('.pagination.section');
 const paginationContainer = document.getElementById(
     'tui-pagination-container'
 );
-//paginationContainer.appendChild(galleryEl);
 
 export function makePaginationOptions(totalResults = 1000) {
     return {
-        totalItems: totalResults, //total_results < 10000 ? total_results : 10000,
+        totalItems: totalResults, 
         itemsPerPage: 20,
         visiblePages: 5,
         page: 1,
@@ -39,34 +33,22 @@ export function makePaginationOptions(totalResults = 1000) {
 const options = makePaginationOptions();
 
 export let pagination = new Pagination(paginationContainer, options);
-
+let chanePage = true;
 pagination.on('beforeMove', function(eventData) {
-    //return confirm('Go to page ' + eventData.page + '?');
-    movieService.page = eventData.page;
+
+    console.log(firstPage);
+    movieService.page = eventData.page; 
     createRequest();
 });
 
 pagination.on('afterMove', function(eventData) {
-    //alert('The current page is ' + eventData.page);
-
+    chanePage = false;
     pagination._options.totalItems = totalResults;
 
 });
 
-
-// pagination.on('afterMove', updateMoviesList);
-
-// export async function updateMoviesList(event) {
-//   const currentPage = event.page;
-
-//   await moviesListMarkupFirstRender(currentPage);
-//   document.documentElement.scrollTo({ top: 0, behavior: 'smooth' });
-// }
-
-// export function addHiddenPagination() {
-//   paginationContainer.classList.add('visually-hidden');
-// }
-
-// export function removeHiddenPagination() {
-//   paginationContainer.classList.remove('visually-hidden');
-// }
+export function changeFirstPage() {
+  
+    pagination.reset();
+    console.log(pagination);
+}
