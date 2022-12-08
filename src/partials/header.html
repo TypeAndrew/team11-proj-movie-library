@@ -5,15 +5,6 @@
       <span class="header__title">Filmoteka</span>
     </a>
 
-    <button class="theme-button" type="button" id="theme-button" aria-label="Switch dark mode button">
-      <span class="theme-button__circle"></span>
-        <span class="theme-button__slider-scene">
-          <span class="theme-button__slider">
-            <span class="theme-button__moon-symb">&#9789;</span>
-            <span class="theme-button__sun-symb">&#9728;</span>
-          </span>
-        </span>
-    </button>
 
     <ul class="header__links">
       <li>
@@ -45,5 +36,22 @@
       </button>
     </form>
   </div>
-  <div class="js-warning header-warning"></div>
+  
+  <div class="header__flex">
+      <div class="js-warning header-warning"></div>
+
+      <div class="theme-button__container">
+        <button class="theme-button" type="button" id="theme-button" aria-label="Switch dark mode button">
+          <span class="theme-button__circle"></span>
+          <span class="theme-button__slider-scene">
+            <span class="theme-button__slider">
+              <span class="theme-button__moon-symb">&#9789;</span>
+              <span class="theme-button__sun-symb">&#9728;</span>
+            </span>
+          </span>
+        </button>
+      </div>
+  </div>
+
+
 </header>

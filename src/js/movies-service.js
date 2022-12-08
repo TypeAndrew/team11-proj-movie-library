@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { warningField } from './refs';
-import { request } from './markup';
+//import { request } from './markup';
 const API_KEY = 'c491b5b8e2b4a9ab13619b0a91f8bb41';
 const BASE_URL = 'https://api.themoviedb.org/3/';
 let request = `${BASE_URL}trending/movie/day?api_key=${API_KEY}`;

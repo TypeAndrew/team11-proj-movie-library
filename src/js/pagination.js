@@ -1,5 +1,5 @@
 import Pagination from 'tui-pagination';
-import { createRequest, movieService, createRequest, totalResults, firstPage} from './markup';
+import { createRequest, movieService, createRequest, totalResults} from './markup';
 
 const paginationContainer = document.getElementById(
     'tui-pagination-container'
@@ -36,7 +36,6 @@ export let pagination = new Pagination(paginationContainer, options);
 let chanePage = true;
 pagination.on('beforeMove', function(eventData) {
 
-    console.log(firstPage);
     movieService.page = eventData.page; 
     createRequest();
 });
@@ -50,5 +49,5 @@ pagination.on('afterMove', function(eventData) {
 export function changeFirstPage() {
   
     pagination.reset();
-    console.log(pagination);
+    
 }

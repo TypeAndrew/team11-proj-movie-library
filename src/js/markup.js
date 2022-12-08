@@ -14,7 +14,7 @@ import {
     originalTitle,
     genres,
     overview,
-   
+
 } from './refs';
 import { pagination } from './pagination';
 
@@ -24,8 +24,10 @@ const API_KEY = 'c491b5b8e2b4a9ab13619b0a91f8bb41';
 const BASE_URL = 'https://api.themoviedb.org/3/';
 const language = 'en-US';
 const include_adult = false;
+
 let request = `${BASE_URL}trending/movie/day?api_key=${API_KEY}&page=${movieService.page}`;
 export let firstPage = false;
+
 export let totalPages = 0;
 export let totalResults = 0;
 
@@ -41,7 +43,7 @@ function createMarkup(response) {
       element.backdrop_path==null?element.poster_path:element.backdrop_path
     }"><img class="movie__poster" src="https://www.themoviedb.org/t/p/original/${
       element.poster_path
-    }" alt="${element.original_title}" loading="lazy" id="${element.id}"></a>
+    }" alt="${element.original_title}" loading="lazy" id="${element.id}" loading="lazy"></a>
     <div class="movie__info">
     <h2 class="movie__name">${element.title}</h2>
     <p class="movie__info">${strGenres}<span class="movie__year">${element.release_date.slice(
