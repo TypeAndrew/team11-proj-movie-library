@@ -5,6 +5,8 @@ const elLabrary = document.querySelector('.library__js-card');
 const locallistWatch = 'listToWatch';
 const locallistQueue = 'listToQueue';
 
+let markup = '';
+
 if (btnWatch && btnQueue) {
   btnWatch.addEventListener('click', onBtnWatchedClick);
   btnQueue.addEventListener('click', onBtnQueueClick);
