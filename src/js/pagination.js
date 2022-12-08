@@ -1,5 +1,5 @@
 import Pagination from 'tui-pagination';
-import { getMovies, createRequest, movieService, createRequest, totalPages, totalResults } from './markup';
+import {  createRequest, movieService, createRequest,  totalResults } from './markup';
 import { BASE_URL } from './movies-service';
 //import { formEl } from './refs';
 
