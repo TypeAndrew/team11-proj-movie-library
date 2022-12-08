@@ -1,24 +1,25 @@
 import nothingHereJpg from '../images/library/Theres_nothing_here.jpg';
-const btnWatch = document.querySelector("#watched")
-const btnQueue = document.querySelector("#queue")
-const elLabrary = document.querySelector(".library__js-card")
+const btnWatch = document.querySelector('#watched');
+const btnQueue = document.querySelector('#queue');
+const elLabrary = document.querySelector('.library__js-card');
 const locallistWatch = 'listToWatch';
 const locallistQueue = 'listToQueue';
-  
-btnWatch.addEventListener('click', onBtnWatchedClick);
-btnQueue.addEventListener('click', onBtnQueueClick);
+
+if (btnWatch && btnQueue) {
+  btnWatch.addEventListener('click', onBtnWatchedClick);
+  btnQueue.addEventListener('click', onBtnQueueClick);
+}
 
 function onBtnWatchedClick() {
   try {
     let watchedFilms = localStorage.getItem(locallistWatch);
     if (watchedFilms) {
       watchedFilms = JSON.parse(watchedFilms);
-        creadListWatch(watchedFilms);
+      creadListWatch(watchedFilms);
     }
-    if(watchedFilms.length === 0)  {
-    elLabrary.innerHTML = `<img src="${nothingHereJpg}" alt="Theres nothing" />`;
-    
-  }
+    if (watchedFilms.length === 0) {
+      elLabrary.innerHTML = `<img src="${nothingHereJpg}" alt="Theres nothing" />`;
+    }
   } catch (error) {
     console.log(error);
   }
@@ -26,13 +27,13 @@ function onBtnWatchedClick() {
   return;
 }
 
- function creadListWatch() {
-    elLabrary.innerHTML = ''
-    let response = JSON.parse(localStorage.getItem(locallistWatch))
-     
-   markup = ''
-        response.map(element => {
-          markup += `<li class="movie__card">
+function creadListWatch() {
+  elLabrary.innerHTML = '';
+  let response = JSON.parse(localStorage.getItem(locallistWatch));
+
+  markup = '';
+  response.map(element => {
+    markup += `<li class="movie__card">
     <a href="https://www.themoviedb.org/t/p/original/${
       element.backdrop_path
     }"><img class="movie__poster" src="https://www.themoviedb.org/t/p/original/${
@@ -46,10 +47,9 @@ function onBtnWatchedClick() {
     )}</span></p>
     </div>
     </li>`;
-        });
-        elLabrary.insertAdjacentHTML('afterbegin',markup)
-      
-   }
+  });
+  elLabrary.insertAdjacentHTML('afterbegin', markup);
+}
 
 function onBtnQueueClick() {
   try {
@@ -57,13 +57,11 @@ function onBtnQueueClick() {
     if (queueFilms) {
       watchedFilms = JSON.parse(queueFilms);
 
-        creadListQueue(queueFilms);
-
+      creadListQueue(queueFilms);
     }
-      if(watchedFilms.length === 0)  {
-    elLabrary.innerHTML = `<img src="${nothingHereJpg}" alt="Theres nothing" />`;
-    
-  }
+    if (watchedFilms.length === 0) {
+      elLabrary.innerHTML = `<img src="${nothingHereJpg}" alt="Theres nothing" />`;
+    }
   } catch (error) {
     console.log(error);
   }
@@ -71,13 +69,13 @@ function onBtnQueueClick() {
   return;
 }
 
-   function creadListQueue() {
-    elLabrary.innerHTML = ''
- 
-   let response = JSON.parse(localStorage.getItem(locallistQueue))
-   markup = ''
-    response.map(element => {
-          markup += `<li class="movie__card">
+function creadListQueue() {
+  elLabrary.innerHTML = '';
+
+  let response = JSON.parse(localStorage.getItem(locallistQueue));
+  markup = '';
+  response.map(element => {
+    markup += `<li class="movie__card">
     <a href="https://www.themoviedb.org/t/p/original/${
       element.backdrop_path
     }"><img class="movie__poster" src="https://www.themoviedb.org/t/p/original/${
@@ -91,6 +89,6 @@ function onBtnQueueClick() {
     )}</span></p>
     </div>
     </li>`;
-        });
-        elLabrary.innerHTML = markup;
-   }
+  });
+  elLabrary.innerHTML = markup;
+}
