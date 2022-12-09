@@ -35,8 +35,8 @@ async function showModalMovie(evt) {
 
   //const movies = await movieService.fetchMovies(request);
   
-  const requiredMovie = movies.data.results.find(
- // const requiredMovie = tempData.find(
+  //const requiredMovie = movies.data.results.find(
+  const requiredMovie = tempData.find(
     movie => movie.id === Number(evt.target.id)
   );
 /////
