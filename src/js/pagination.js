@@ -1,12 +1,14 @@
 import Pagination from 'tui-pagination';
-import {
-  createRequest,
-  movieService,
-  createRequest,
-  totalResults,
-} from './markup';
 
-const paginationContainer = document.getElementById('tui-pagination-container');
+import { createRequest, movieService, createRequest, totalResults, firstPage} from './markup';
+
+const paginationContainers = document.querySelectorAll(
+    '.tui-pagination'
+);
+const paginationContainerTop = paginationContainers[0];
+const paginationContainer = paginationContainers[1];
+
+
 
 export function makePaginationOptions(totalResults = 1000) {
   return {
@@ -40,17 +42,51 @@ export function makePaginationOptions(totalResults = 1000) {
 const options = makePaginationOptions();
 
 export let pagination = new Pagination(paginationContainer, options);
+export let paginationTop = new Pagination(paginationContainerTop, options);
 let chanePage = true;
-pagination.on('beforeMove', function (eventData) {
-  movieService.page = eventData.page;
-  createRequest();
+
+pagination.on('beforeMove', function(eventData) {
+
+    console.log(firstPage);
+    movieService.page = eventData.page; 
+    createRequest();
 });
 
-pagination.on('afterMove', function (eventData) {
-  chanePage = false;
-  pagination._options.totalItems = totalResults;
+paginationTop.on('beforeMove', function(eventData) {
+
+    console.log(firstPage);
+    movieService.page = eventData.page; 
+    createRequest();
+});
+
+pagination.on('afterMove', function(eventData) {
+    if (chanePage === true) {
+        pagination._options.totalItems = totalResults;
+        paginationTop.reset(eventData.page);
+        paginationTop._options.totalItems = totalResults;
+        chanePage = false;
+        paginationTop.movePageTo(eventData.page);
+        
+    }
+    chanePage = true;
+});
+
+paginationTop.on('afterMove', function(eventData) {
+    if (chanePage === true) {
+        paginationTop._options.totalItems = totalResults;
+        pagination.reset(eventData.page);
+        pagination._options.totalItems = totalResults;
+        chanePage = false;
+        pagination.movePageTo(eventData.page);
+        
+    }
+    chanePage = true;
 });
 
 export function changeFirstPage() {
-  pagination.reset();
+  
+    pagination.reset();
+    paginationTop.reset();
+    console.log(pagination);
+
 }
