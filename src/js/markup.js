@@ -25,7 +25,7 @@ const BASE_URL = 'https://api.themoviedb.org/3/';
 const language = 'en-US';
 const include_adult = false;
 
-let request = `${BASE_URL}trending/movie/day?api_key=${API_KEY}&page=${movieService.page}`;
+export let request = `${BASE_URL}trending/movie/day?api_key=${API_KEY}&page=${movieService.page}`;
 export let firstPage = false;
 
 export let totalPages = 0;
