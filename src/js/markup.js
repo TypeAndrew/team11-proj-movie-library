@@ -3,19 +3,17 @@ import addToLocalStorage from './localStorage-logic';
 import addToFirebase from './firebase';
 import { changeFirstPage } from './pagination';
 import {
-
-    formEl,
-    warningField,
-    galleryEl,
-    poster,
-    movieTitle,
-    averageVotes,
-    totalVotes,
-    popularity,
-    originalTitle,
-    genres,
-    overview,
-
+  formEl,
+  warningField,
+  galleryEl,
+  poster,
+  movieTitle,
+  averageVotes,
+  totalVotes,
+  popularity,
+  originalTitle,
+  genres,
+  overview,
 } from './refs';
 
 export const movieService = new MovieApiService();
@@ -30,15 +28,14 @@ export let totalPages = 0;
 export let totalResults = 0;
 let strGenres;
 function createMarkup(response) {
-
-    let markup = '';
-    totalPages = response.data.total_pages;
-    totalResults = response.data.total_results;
-    response.data.results.map(element => {
-        if (element === undefined) { 
-            strGenres = movieService.findGenresById(element);
-        }
-        markup += `<li class="movie__card">
+  let markup = '';
+  totalPages = response.data.total_pages;
+  totalResults = response.data.total_results;
+  response.data.results.map(element => {
+    if (element !== undefined) {
+      strGenres = movieService.findGenresById(element);
+    }
+    markup += `<li class="movie__card">
 
     <a href="https://www.themoviedb.org/t/p/original/${
       element.backdrop_path == null
@@ -46,7 +43,6 @@ function createMarkup(response) {
         : element.backdrop_path
     }"><img class="movie__poster" src="https://www.themoviedb.org/t/p/original/${
       element.poster_path
-
     }" alt="${element.original_title}" loading="lazy" id="${
       element.id
     }" loading="lazy"></a>
@@ -65,25 +61,22 @@ function createMarkup(response) {
 }
 
 export function createModalMarkup(element) {
+  let strGenres = movieService.findGenresById(element);
 
+  if (element.poster_path !== null) {
+    poster.src = `https://www.themoviedb.org/t/p/original/${element.poster_path}`;
+  }
+  poster.alt = `${element.original_title}`;
+  movieTitle.textContent = `${element.title}`;
+  averageVotes.textContent = `${element.vote_average}`;
+  totalVotes.textContent = `${element.vote_count}`;
+  popularity.textContent = `${element.popularity}`;
+  originalTitle.textContent = `${element.original_title}`;
+  genres.textContent = `${strGenres}`;
+  overview.textContent = `${element.overview}`;
 
-    let  strGenres = movieService.findGenresById(element);
-    
-    if (element.poster_path !== null) {
-        poster.src = `https://www.themoviedb.org/t/p/original/${element.poster_path}`;
-    }
-    poster.alt = `${element.original_title}`;
-    movieTitle.textContent = `${element.title}`;
-    averageVotes.textContent = `${element.vote_average}`;
-    totalVotes.textContent = `${element.vote_count}`;
-    popularity.textContent = `${element.popularity}`;
-    originalTitle.textContent = `${element.original_title}`;
-    genres.textContent = `${strGenres}`;
-    overview.textContent = `${element.overview}`;
-
-    addToFirebase(element);
-    addToLocalStorage(element);
-
+  addToFirebase(element);
+  addToLocalStorage(element);
 }
 
 async function getMovies(request) {
