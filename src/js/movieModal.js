@@ -5,7 +5,7 @@ const movieService = new MovieApiService();
 
 const API_KEY = 'c491b5b8e2b4a9ab13619b0a91f8bb41';
 const BASE_URL = 'https://api.themoviedb.org/3/';
-//let request = `${BASE_URL}trending/movie/day?api_key=${API_KEY}`;
+let request1 = request;//`${BASE_URL}trending/movie/day?api_key=${API_KEY}`;
 let language = 'en-US';
 let include_adult = false;
 
