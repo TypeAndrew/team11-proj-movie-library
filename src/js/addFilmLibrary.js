@@ -17,15 +17,15 @@ if (btnWatch && btnQueue) {
 }
 
 function onBtnWatchedClick() {
+  try {
     btnWatch.classList.add('library__button--active');
     btnQueue.classList.remove('library__button--active');
-  try {
     watchedFilms = localStorage.getItem(locallistWatch);
     if (watchedFilms) {
       watchedFilms = JSON.parse(watchedFilms);
       creadListWatch(watchedFilms);
     }
-    if (watchedFilms.length === 0) {
+    if (watchedFilms === null || watchedFilms.length === 0) {
       elLabrary.innerHTML = `<img src="${nothingHereJpg}" class="img__nothing-here" alt="Theres nothing" />`;
     }
   } catch (error) {
@@ -60,8 +60,8 @@ function creadListWatch() {
 }
 
 function onBtnQueueClick() {
-    btnWatch.classList.remove('library__button--active');
-    btnQueue.classList.add('library__button--active');
+  btnWatch.classList.remove('library__button--active');
+  btnQueue.classList.add('library__button--active');
   try {
     queueFilms = localStorage.getItem(locallistQueue);
     if (queueFilms) {
@@ -69,7 +69,7 @@ function onBtnQueueClick() {
 
       creadListQueue(queueFilms);
     }
-    if (watchedFilms.length === 0) {
+    if (watchedFilms === null || watchedFilms.length === 0) {
       elLabrary.innerHTML = `<img src="${nothingHereJpg}" alt="Theres nothing" />`;
     }
   } catch (error) {
