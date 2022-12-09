@@ -46,21 +46,23 @@ export let paginationTop = new Pagination(paginationContainerTop, options);
 let chanePage = true;
 
 pagination.on('beforeMove', function(eventData) {
-
+    currentPage = eventData.page;
     console.log(firstPage);
     movieService.page = eventData.page; 
     createRequest();
 });
 
 paginationTop.on('beforeMove', function(eventData) {
-
+    currentPage = eventData.page;
     console.log(firstPage);
     movieService.page = eventData.page; 
     createRequest();
 });
 
 pagination.on('afterMove', function(eventData) {
-    if (chanePage === true) {
+  
+  if (chanePage === true) {
+        
         pagination._options.totalItems = totalResults;
         paginationTop.reset(eventData.page);
         paginationTop._options.totalItems = totalResults;

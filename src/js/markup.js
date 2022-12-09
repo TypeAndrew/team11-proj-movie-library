@@ -28,14 +28,18 @@ export let firstPage = false;
 export let totalPages = 0;
 export let totalResults = 0;
 let strGenres;
+export let tempData = [];
 function createMarkup(response) {
   let markup = '';
+  
   totalPages = response.data.total_pages;
   totalResults = response.data.total_results;
-  response.data.results.map(element => {
+    
+    response.data.results.map(element => {
     if (element !== undefined) {
       strGenres = movieService.findGenresById(element);
-    }
+      }
+      tempData.push(element);
     markup += `<li class="movie__card">
 
     <a href="https://www.themoviedb.org/t/p/original/${
@@ -57,7 +61,7 @@ function createMarkup(response) {
     </div>
     </li>`;
   });
-
+  console.log(tempData);
   return markup;
 }
 
