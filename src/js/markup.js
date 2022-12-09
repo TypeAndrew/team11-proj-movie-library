@@ -22,6 +22,7 @@ const API_KEY = 'c491b5b8e2b4a9ab13619b0a91f8bb41';
 const BASE_URL = 'https://api.themoviedb.org/3/';
 const language = 'en-US';
 const include_adult = false;
+
 export let request = `${BASE_URL}trending/movie/day?api_key=${API_KEY}&page=${movieService.page}`;
 export let firstPage = false;
 export let totalPages = 0;
