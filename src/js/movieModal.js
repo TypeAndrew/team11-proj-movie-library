@@ -1,11 +1,11 @@
 import { modalMovie, galleryEl, closeBtn } from './refs';
 import MovieApiService from './movies-service';
-import { createModalMarkup } from './markup';
+import { createModalMarkup, request } from './markup';
 const movieService = new MovieApiService();
 
 const API_KEY = 'c491b5b8e2b4a9ab13619b0a91f8bb41';
 const BASE_URL = 'https://api.themoviedb.org/3/';
-let request = `${BASE_URL}trending/movie/day?api_key=${API_KEY}`;
+//let request = `${BASE_URL}trending/movie/day?api_key=${API_KEY}`;
 let language = 'en-US';
 let include_adult = false;
 
@@ -35,7 +35,10 @@ async function showModalMovie(evt) {
     const requiredMovie = movies.data.results.find(
         movie => movie.id === Number(evt.target.id)
     );
-    createModalMarkup(requiredMovie);
+    
+    //if (requiredMovie !== undefined) {
+      createModalMarkup(requiredMovie);
+   // }
 
 
   document.body.classList.toggle("is-open");
