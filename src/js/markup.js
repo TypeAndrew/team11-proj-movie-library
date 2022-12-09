@@ -66,7 +66,6 @@ function createMarkup(response) {
 
 export function createModalMarkup(element) {
 
-
     let  strGenres = movieService.findGenresById(element);
     
     if (element.poster_path !== null) {
