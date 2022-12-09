@@ -39,7 +39,7 @@ async function showModalMovie(evt) {
  // const requiredMovie = tempData.find(
     movie => movie.id === Number(evt.target.id)
   );
-
+/////
   //if (requiredMovie !== undefined) {
   createModalMarkup(requiredMovie);
   // }
