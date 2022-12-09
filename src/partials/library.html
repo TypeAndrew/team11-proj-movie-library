@@ -1,0 +1,31 @@
+<header class="my-library my-library-header">
+    <div class="my-library__container">
+        <nav class="my-library-nav">
+            <a href="/src/index.html" class="logo">Filmoteka</a>
+
+            <button class="theme-button" type="button" id="theme-button" aria-label="Switch dark mode button">
+                <span class="theme-button__circle"></span>
+                    <span class="theme-button__slider-scene">
+                        <span class="theme-button__slider">
+                            <span class="theme-button__moon-symb">&#9789;</span>
+                            <span class="theme-button__sun-symb">&#9728;</span>
+                        </span>
+                    </span>
+            </button>
+            
+            <ul class="navigation js-choice-storage">
+                <li class="navigation__item">
+                    <a href="/src/index.html" class="navigation__link">Home</a>
+                </li>
+                <li class="navigation__item">
+                    <a href="" class="navigation__link navigation__link--current">My library</a>
+                </li>
+            </ul>
+        </nav>
+
+        <div class="my-library__buttons">
+            <button type="button" class="library__button library__button--active" id="watched">Watched</button>
+            <button type="button" class="library__button" id="queue">Queue</button>
+        </div>
+    </div>
+</header>

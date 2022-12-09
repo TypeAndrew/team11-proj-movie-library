@@ -3,6 +3,7 @@ import addToLocalStorage from './localStorage-logic';
 import addToFirebase from './firebase';
 import { changeFirstPage } from './pagination';
 import {
+
     formEl,
     warningField,
     galleryEl,
@@ -14,7 +15,7 @@ import {
     originalTitle,
     genres,
     overview,
-   
+
 } from './refs';
 
 export const movieService = new MovieApiService();
@@ -29,6 +30,7 @@ export let totalPages = 0;
 export let totalResults = 0;
 let strGenres;
 function createMarkup(response) {
+
     let markup = '';
     totalPages = response.data.total_pages;
     totalResults = response.data.total_results;
@@ -37,11 +39,18 @@ function createMarkup(response) {
             strGenres = movieService.findGenresById(element);
         }
         markup += `<li class="movie__card">
+
     <a href="https://www.themoviedb.org/t/p/original/${
-      element.backdrop_path==null?element.poster_path:element.backdrop_path
+      element.backdrop_path == null
+        ? element.poster_path
+        : element.backdrop_path
     }"><img class="movie__poster" src="https://www.themoviedb.org/t/p/original/${
       element.poster_path
-    }" alt="${element.original_title}" loading="lazy" id="${element.id}"></a>
+
+    }" alt="${element.original_title}" loading="lazy" id="${
+      element.id
+    }" loading="lazy"></a>
+
     <div class="movie__info">
     <h2 class="movie__name">${element.title}</h2>
     <p class="movie__info">${strGenres}<span class="movie__year">${element.release_date.slice(
@@ -50,9 +59,9 @@ function createMarkup(response) {
     )}</span></p>
     </div>
     </li>`;
-    });
+  });
 
-    return markup;
+  return markup;
 }
 
 export function createModalMarkup(element) {
@@ -73,51 +82,51 @@ export function createModalMarkup(element) {
 
     addToFirebase(element);
     addToLocalStorage(element);
+
 }
 
 async function getMovies(request) {
-    try {
-        const response = await movieService.fetchMovies(request);
-        if (response.data.total_results === 0) {
-            warningField.textContent =
-                'Sorry, there are no movies matching your search query. Please try again.';
-            setTimeout(() => (warningField.textContent = ''), 3000);
-        } else {
-            galleryEl.innerHTML = createMarkup(response);
-        }
-    } catch (error) {
-        warningField.textContent = 'Please write something in the box :)';
-         setTimeout(() => (warningField.textContent = ''), 3000);
-
-        console.log(error);
+  try {
+    const response = await movieService.fetchMovies(request);
+    if (response.data.total_results === 0) {
+      warningField.textContent =
+        'Sorry, there are no movies matching your search query. Please try again.';
+      setTimeout(() => (warningField.textContent = ''), 3000);
+    } else {
+      galleryEl.innerHTML = createMarkup(response);
     }
+  } catch (error) {
+    warningField.textContent = 'Please write something in the box :)';
+    setTimeout(() => (warningField.textContent = ''), 3000);
+
+    console.log(error);
+  }
 }
 
 export function createRequest() {
-    let query = formEl.elements.searchmovies.value;
-   // console.log(movieService);
-    if (query !== "" && query !== undefined)  {
-      
-        request = `${BASE_URL}search/movie?api_key=${API_KEY}&language=${language}&page=${movieService.page}&include_adult=${include_adult}&query=${query}`;
-        getMovies(request);
-    } else {
-        firstPage = false;
-        request = `${BASE_URL}trending/movie/day?api_key=${API_KEY}&page=${movieService.page}`;
-        getMovies(request);
-    }
+  let query = formEl.elements.searchmovies.value;
+  // console.log(movieService);
+  if (query !== '' && query !== undefined) {
+    request = `${BASE_URL}search/movie?api_key=${API_KEY}&language=${language}&page=${movieService.page}&include_adult=${include_adult}&query=${query}`;
+    getMovies(request);
+  } else {
+    firstPage = false;
+    request = `${BASE_URL}trending/movie/day?api_key=${API_KEY}&page=${movieService.page}`;
+    getMovies(request);
+  }
 }
 
 function onFormSubmit(event, request) {
-    event.preventDefault();
-    changeFirstPage();
-    movieService.page = 1;
-    createRequest(event.page);
+  event.preventDefault();
+  changeFirstPage();
+  movieService.page = 1;
+  createRequest(event.page);
 }
 
 if (formEl) {
-    formEl.addEventListener('submit', onFormSubmit);
+  formEl.addEventListener('submit', onFormSubmit);
 
-    movieService.getGenre();
+  movieService.getGenre();
 
-    createRequest();
+  createRequest();
 }
