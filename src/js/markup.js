@@ -14,9 +14,8 @@ import {
     originalTitle,
     genres,
     overview,
-
+   
 } from './refs';
-import { pagination } from './pagination';
 
 export const movieService = new MovieApiService();
 
@@ -24,26 +23,25 @@ const API_KEY = 'c491b5b8e2b4a9ab13619b0a91f8bb41';
 const BASE_URL = 'https://api.themoviedb.org/3/';
 const language = 'en-US';
 const include_adult = false;
-
-let request = `${BASE_URL}trending/movie/day?api_key=${API_KEY}&page=${movieService.page}`;
+export let request = `${BASE_URL}trending/movie/day?api_key=${API_KEY}&page=${movieService.page}`;
 export let firstPage = false;
-
 export let totalPages = 0;
 export let totalResults = 0;
-
+let strGenres;
 function createMarkup(response) {
     let markup = '';
     totalPages = response.data.total_pages;
     totalResults = response.data.total_results;
     response.data.results.map(element => {
-        let strGenres = movieService.findGenresById(element);
-
+        if (element === undefined) { 
+            strGenres = movieService.findGenresById(element);
+        }
         markup += `<li class="movie__card">
     <a href="https://www.themoviedb.org/t/p/original/${
       element.backdrop_path==null?element.poster_path:element.backdrop_path
     }"><img class="movie__poster" src="https://www.themoviedb.org/t/p/original/${
       element.poster_path
-    }" alt="${element.original_title}" loading="lazy" id="${element.id}" loading="lazy"></a>
+    }" alt="${element.original_title}" loading="lazy" id="${element.id}"></a>
     <div class="movie__info">
     <h2 class="movie__name">${element.title}</h2>
     <p class="movie__info">${strGenres}<span class="movie__year">${element.release_date.slice(
@@ -58,8 +56,9 @@ function createMarkup(response) {
 }
 
 export function createModalMarkup(element) {
-    let strGenres = movieService.findGenresById(element);
 
+    let  strGenres = movieService.findGenresById(element);
+    
     if (element.poster_path !== null) {
         poster.src = `https://www.themoviedb.org/t/p/original/${element.poster_path}`;
     }
