@@ -1,8 +1,9 @@
+import nothingHereJpg from '../images/library/Theres_nothing_here.jpg';
 import { btnAddWatched, btnAddQueue, closeBtn } from './refs';
 import { initializeApp } from "firebase/app";
-import { getDatabase, set, ref, get, child, update, remove } from "firebase/database";
+import { getDatabase, set, ref, get, child, update, remove,onValue  } from "firebase/database";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
-
+const elLabrary = document.querySelector('.library__js-card');
 const firebaseConfig = {
     apiKey: "AIzaSyAfAXK_eMmM8x3Fv1Qp4fXOpLOfKmbbEck",
     authDomain: "movieproject11.firebaseapp.com",
@@ -78,7 +79,7 @@ export default function addToFirebase(element) {
         }
             
         if (removeMovie === true) {
-            //const dbref = ref(database);
+            const dbref = ref(database);
             remove(ref(database, table + '/' + selectMovie.title)
             ).then(() => {
                 
@@ -91,3 +92,54 @@ export default function addToFirebase(element) {
     };   
 
 };
+
+
+export async function selectData(table) {
+    let dataTable = [];
+    const dbRef = ref(database);
+    await get(child(dbRef, table)).then((snapshot) => {
+    if (snapshot.exists()) {
+        dataTable.push(snapshot.val()); 
+        console.log(snapshot.val());
+        
+   } else {
+        console.log("No data available");
+   }
+    }).catch((error) => {
+    console.error(error);
+    });
+    
+     
+    if (dataTable) {
+      //dataTable = JSON.parse(dataTable);
+      creadListWatch(dataTable);
+    }
+    if (dataTable === null || dataTable.length === 0) {
+      elLabrary.innerHTML = `<img src="${nothingHereJpg}" class="img__nothing-here" alt="Theres nothing" />`;
+    }
+  
+};
+
+function creadListWatch(dataTable) {
+  elLabrary.innerHTML = '';
+  let response = Object.values(dataTable[0]);
+
+  markup = '';
+  response.map(element => {
+    markup += `<li class="movie__card">
+    <a href="https://www.themoviedb.org/t/p/original/${
+      element.backdrop_path
+    }"><img class="movie__poster" src="https://www.themoviedb.org/t/p/original/${
+      element.poster_path
+    }" alt="${element.original_title}" loading="lazy" id="${element.id}"></a>
+    <div class="movie__info">
+    <h2 class="movie__name">${element.title}</h2>
+    <p class="movie__info"><span class="movie__year">${element.release_date.slice(
+      0,
+      4
+    )}</span></p>
+    </div>
+    </li>`;
+  });
+  elLabrary.insertAdjacentHTML('afterbegin', markup);
+}

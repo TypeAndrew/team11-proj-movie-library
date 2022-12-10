@@ -1,6 +1,6 @@
 import MovieApiService from './movies-service';
 import addToLocalStorage from './localStorage-logic';
-//import addToFirebase from './firebase';
+import addToFirebase from './firebase';
 import { changeFirstPage } from './pagination';
 import {
   formEl,
@@ -78,7 +78,7 @@ export function createModalMarkup(element) {
   genres.textContent = `${strGenres}`;
   overview.textContent = `${element.overview}`;
   
-  //addToFirebase(element);
+  addToFirebase(element);
   addToLocalStorage(element);
 }
 

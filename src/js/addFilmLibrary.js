@@ -1,7 +1,9 @@
 import nothingHereJpg from '../images/library/Theres_nothing_here.jpg';
+import { selectData } from './firebase';
 const btnWatch = document.querySelector('#watched');
 const btnQueue = document.querySelector('#queue');
 const elLabrary = document.querySelector('.library__js-card');
+const theme = localStorage.getItem('theme');
 const locallistWatch = 'listToWatch';
 const locallistQueue = 'listToQueue';
 
@@ -20,14 +22,20 @@ function onBtnWatchedClick() {
   try {
     btnWatch.classList.add('library__button--active');
     btnQueue.classList.remove('library__button--active');
-    watchedFilms = localStorage.getItem(locallistWatch);
-    if (watchedFilms) {
-      watchedFilms = JSON.parse(watchedFilms);
-      creadListWatch(watchedFilms);
-    }
-    if (watchedFilms === null || watchedFilms.length === 0) {
-      elLabrary.innerHTML = `<img src="${nothingHereJpg}" class="img__nothing-here" alt="Theres nothing" />`;
-    }
+    if (theme === 'dark') {
+        watchedFilms = selectData('watched_movies/');
+    }  else {
+      watchedFilms = localStorage.getItem(locallistWatch);
+    
+    
+      if (watchedFilms) {
+        watchedFilms = JSON.parse(watchedFilms);
+        creadListWatch(watchedFilms);
+      }
+      if (watchedFilms === null || watchedFilms.length === 0) {
+        elLabrary.innerHTML = `<img src="${nothingHereJpg}" class="img__nothing-here" alt="Theres nothing" />`;
+      }
+    } 
   } catch (error) {
     console.log(error);
   }
@@ -63,14 +71,18 @@ function onBtnQueueClick() {
   btnWatch.classList.remove('library__button--active');
   btnQueue.classList.add('library__button--active');
   try {
-    queueFilms = localStorage.getItem(locallistQueue);
-    if (queueFilms) {
-      watchedFilms = JSON.parse(queueFilms);
+    if (theme === 'dark') {
+      watchedFilms = selectData('queue_movies/');
+    } else { 
+      queueFilms = localStorage.getItem(locallistQueue);
+      if (queueFilms) {
+        watchedFilms = JSON.parse(queueFilms);
 
-      creadListQueue(queueFilms);
-    }
-    if (watchedFilms === null || watchedFilms.length === 0) {
-      elLabrary.innerHTML = `<img src="${nothingHereJpg}" alt="Theres nothing" />`;
+        creadListQueue(queueFilms);
+      }
+      if (watchedFilms === null || watchedFilms.length === 0) {
+        elLabrary.innerHTML = `<img src="${nothingHereJpg}" alt="Theres nothing" />`;
+      }
     }
   } catch (error) {
     console.log(error);
