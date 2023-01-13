@@ -2,10 +2,10 @@
   "name": "filmoteka-group11",
   "version": "2.0.0",
   "description": "",
-  "homepage": "https://typeandrew.github.io/project-js2/",
+  "homepage": "https://typeandrew.github.io/https://typeandrew.github.io/team11-js-movie-store//",
   "scripts": {
     "start": "parcel src/*.html",
-    "build": "parcel build src/*.html --public-url /project-js2/"
+    "build": "parcel build src/*.html --public-url /https://typeandrew.github.io/team11-js-movie-store/"
   },
   "repository": {
     "type": "git",
