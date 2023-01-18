@@ -124,7 +124,7 @@ function creadListWatch(dataTable) {
   elLabrary.innerHTML = '';
   let response = Object.values(dataTable[0]);
 
-  markup = '';
+  let markup = '';
   response.map(element => {
     markup += `<li class="movie__card">
     <a href="https://www.themoviedb.org/t/p/original/${
